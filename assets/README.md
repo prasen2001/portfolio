@@ -6,5 +6,6 @@ Keep public portfolio files organized in these folders:
 - `documents/certificates/` - public certificate PDFs or verification-link notes
 - `images/photographs/` - professional headshots and personal photographs
 - `images/projects/` - project screenshots, diagrams, and thumbnails
+- `icons/tech/` - locally stored technology SVGs and attribution
 
 Before publishing an asset, check that it does not contain private information, customer data, proprietary material, or anything covered by an NDA.

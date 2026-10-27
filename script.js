@@ -4,6 +4,28 @@ const setText = (selector, value) => {
   document.querySelectorAll(selector).forEach((element) => { element.textContent = value; });
 };
 
+const techAssets = {
+  "react": "assets/icons/tech/react.svg",
+  "python": "assets/icons/tech/python.svg",
+  "flask": "assets/icons/tech/flask.svg",
+  "gcp": "assets/icons/tech/gcp.svg",
+  "node.js": "assets/icons/tech/nodejs.svg",
+  "typescript": "assets/icons/tech/typescript.svg",
+  "javascript": "assets/icons/tech/javascript.svg",
+  "java": "assets/icons/tech/java.svg",
+  "pytorch": "assets/icons/tech/pytorch.svg",
+  "tensorflow": "assets/icons/tech/tensorflow.svg",
+  "graphql": "assets/icons/tech/graphql.svg",
+  "nestjs": "assets/icons/tech/nestjs.svg",
+  "docker": "assets/icons/tech/docker.svg",
+  "postgresql": "assets/icons/tech/postgresql.svg",
+  "mongodb": "assets/icons/tech/mongodb.svg",
+  "redis": "assets/icons/tech/redis.svg",
+  "firestore": "assets/icons/tech/firestore.svg",
+  "opencv": "assets/icons/tech/opencv.svg",
+  "c++": "assets/icons/tech/cplusplus.svg"
+};
+
 const techIcons = {
   "react": `<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="1.8" fill="currentColor"/><ellipse cx="12" cy="12" rx="10" ry="4.1" fill="none" stroke="currentColor"/><ellipse cx="12" cy="12" rx="10" ry="4.1" fill="none" stroke="currentColor" transform="rotate(60 12 12)"/><ellipse cx="12" cy="12" rx="10" ry="4.1" fill="none" stroke="currentColor" transform="rotate(120 12 12)"/></svg>`,
   "react flow": `<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="5" cy="6" r="2.2" fill="currentColor"/><circle cx="19" cy="6" r="2.2" fill="currentColor"/><circle cx="12" cy="18" r="2.2" fill="currentColor"/><path d="M7 7.2 10.7 16M17 7.2 13.3 16M7.3 6h9.4" fill="none" stroke="currentColor" stroke-width="1.7"/></svg>`,
@@ -18,11 +40,27 @@ const techIcons = {
   "postgresql": `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.2 4.7C8 2.5 15.4 2 18 5.3c2.2 2.8 1 8.4-1 11.2-.9 1.2-2.2.8-2.3-.3l-.3-3.5c-.6.4-1.4.7-2.3.7-3.6 0-5.8-2.7-6.3-5.5-.2-1.2-.2-2.3.4-3.2Z" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M14.3 12.7c2.6-.7 3.4-2.2 2.7-4.4M13.3 8.5c.2 0 .4-.2.4-.4s-.2-.4-.4-.4-.4.2-.4.4.2.4.4.4Z" fill="currentColor"/></svg>`,
   "langchain": `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.7 8.2 4.8 5.3a2.2 2.2 0 0 1 3.1-3.1l3.6 3.6M16.3 15.8l2.9 2.9a2.2 2.2 0 0 1-3.1 3.1l-3.6-3.6M8.2 16.3l-2.9 2.9a2.2 2.2 0 0 1-3.1-3.1l3.6-3.6M15.8 7.7l2.9-2.9a2.2 2.2 0 0 1 3.1 3.1l-3.6 3.6M8.8 8.8l6.4 6.4M15.2 8.8l-6.4 6.4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>`,
   "docker": `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 13h15.5c.1 3.9-2.7 7-7.7 7C6.3 20 3.7 17.7 3 13Z" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M5 10h3v3H5zM8 7h3v3H8zM8 10h3v3H8zM11 10h3v3h-3zM11 7h3v3h-3zM14 10h3v3h-3z" fill="currentColor"/><path d="M18.5 10.5c1.7 0 2.5-.7 3-1.7.3 1.5-.3 3.1-2.8 3.7" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>`,
+  "java": `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.2 14.2c-3.6 1-1.8 2.2 1.6 2.3 3.7.1 6.1-.8 6.1-.8M8 17.5c-3.8 1.1-1.8 2.6 2.5 2.7 4.6.1 7.2-1 7.2-1M7.5 11.9c0 1.1.5 1.9 1.5 2.3 1.8.7 5 .5 6.6-.2.8-.4 1.2-1.1 1.2-2.1Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M11 11c-2.4-2.6 3.5-3.2.8-6.2M14 10.5c3-2.2-1.1-3.1 1.7-6.9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>`,
+  "javascript": `<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="2" fill="currentColor"/><path d="M11.3 8v7.1c0 2.3-1.4 3-3 2.1M14.1 16.8c.6.5 1.3.8 2.1.8 1.1 0 1.9-.6 1.9-1.5 0-2-3.7-1.2-3.7-3.6 0-1.3 1-2.1 2.6-2.1.7 0 1.4.2 1.9.6" fill="none" stroke="var(--icon-cut, #181817)" stroke-width="1.5" stroke-linecap="round"/></svg>`,
+  "pytorch": `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5.2a7.3 7.3 0 1 0 5.2 2.1" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><path d="m16.8 3.4 1.7 1.7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><circle cx="12" cy="12.5" r="1.3" fill="currentColor"/></svg>`,
+  "tensorflow": `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m4 7.2 8-4.5 8 4.5v4.1l-5.7-3.2v13.1l-4.5-2.6V8.1L4 11.3Z" fill="currentColor"/><path d="m12 2.7 8 4.5-4 2.3-4-2.3-4 2.3-4-2.3Z" fill="currentColor" opacity=".65"/></svg>`,
+  "graphql": `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 7.8 4.5v9L12 21l-7.8-4.5v-9Z" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M12 3 4.2 16.5h15.6Zm-7.8 4.5h15.6L12 21Z" fill="none" stroke="currentColor" stroke-width="1.2"/><g fill="currentColor"><circle cx="12" cy="3" r="1.5"/><circle cx="4.2" cy="7.5" r="1.5"/><circle cx="4.2" cy="16.5" r="1.5"/><circle cx="12" cy="21" r="1.5"/><circle cx="19.8" cy="16.5" r="1.5"/><circle cx="19.8" cy="7.5" r="1.5"/></g></svg>`,
+  "nestjs": `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8 20 6v6.8c0 4.7-3.2 7.4-8 8.4-4.8-1-8-3.7-8-8.4V6Z" fill="currentColor"/><path d="M7.2 16.8V8l9.6 8.8V8" fill="none" stroke="var(--icon-cut, white)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+  "mongodb": `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.2 2.2c3.2 4.1 5 7.4 4.8 10.4-.2 3.5-2 6.2-4.8 8.3-2.9-2.3-5-5-5.1-8.4-.1-3 1.7-6.3 5.1-10.3Z" fill="currentColor"/><path d="M12.2 5.1v16.7" stroke="var(--icon-cut, white)" stroke-width="1.2" opacity=".8"/></svg>`,
+  "redis": `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 7 9-4 9 4-9 4Z" fill="currentColor"/><path d="m3 11 9 4 9-4M3 15l9 4 9-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><circle cx="8" cy="7" r="1" fill="var(--icon-cut, white)"/><circle cx="12" cy="5.4" r="1" fill="var(--icon-cut, white)"/></svg>`,
+  "firestore": `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 18.2 2.2-14 4.7 3.9 2.4-3.2 4.7 13.3-7 3.5Z" fill="currentColor"/><path d="m7.2 4.2 4.7 12.1 2.4-11.4-2.4 3.2Z" fill="var(--icon-cut, white)" opacity=".32"/></svg>`,
+  "sql": `<svg viewBox="0 0 24 24" aria-hidden="true"><ellipse cx="12" cy="5.2" rx="7.5" ry="3" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M4.5 5.2v6.9c0 1.7 3.4 3 7.5 3s7.5-1.3 7.5-3V5.2M4.5 12v6.8c0 1.7 3.4 3 7.5 3s7.5-1.3 7.5-3V12" fill="none" stroke="currentColor" stroke-width="1.7"/></svg>`,
+  "c++": `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 2.5 8.3 4.8v9.4L12 21.5l-8.3-4.8V7.3Z" fill="currentColor"/><path d="M11.8 8.2a4 4 0 1 0 0 7.6M13.6 10.5v4M11.6 12.5h4M18.4 10.5v4M16.4 12.5h4" fill="none" stroke="var(--icon-cut, white)" stroke-width="1.4" stroke-linecap="round"/></svg>`,
+  "ci/cd": `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.5 7.5a6.4 6.4 0 0 1 9.6-.7L19 8.7M16.5 16.5a6.4 6.4 0 0 1-9.6.7L5 15.3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M19 4.5v4.2h-4.2M5 19.5v-4.2h4.2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="m10 9 5 3-5 3Z" fill="currentColor"/></svg>`,
   "opencv": `<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="6.5" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="7" cy="15.5" r="4" fill="none" stroke="currentColor" stroke-width="2" opacity=".7"/><circle cx="17" cy="15.5" r="4" fill="none" stroke="currentColor" stroke-width="2" opacity=".4"/></svg>`
 };
 
 const techIcon = (name) => {
   const key = name.toLowerCase();
+  const asset = techAssets[key];
+  if (asset) {
+    return `<span class="tech-icon tech-${key.replace(/[^a-z0-9]+/g, "-")}"><img src="${asset}" alt="" decoding="async" /></span>`;
+  }
   const svg = techIcons[key];
   if (svg) return `<span class="tech-icon tech-${key.replace(/[^a-z0-9]+/g, "-")}">${svg}</span>`;
   const letters = name.replace(/[^a-zA-Z0-9]/g, "").slice(0, 2).toUpperCase();
