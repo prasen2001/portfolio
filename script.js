@@ -22,8 +22,54 @@ const techAssets = {
   "mongodb": "assets/icons/tech/mongodb.svg",
   "redis": "assets/icons/tech/redis.svg",
   "firestore": "assets/icons/tech/firestore.svg",
+  "secret manager": "assets/icons/tech/secret-manager.svg",
+  "cloud run": "assets/icons/tech/cloud-run.svg",
+  "compute engine": "assets/icons/tech/compute-engine.svg",
+  "pub/sub": "assets/icons/tech/pubsub.svg",
+  "app engine": "assets/icons/tech/app-engine.svg",
+  "cloud storage": "assets/icons/tech/cloud-storage.svg",
+  "cloud sql": "assets/icons/tech/cloud-sql.svg",
+  "cloud tasks": "assets/icons/tech/cloud-tasks.svg",
+  "cloud functions": "assets/icons/tech/cloud-functions.svg",
+  "pinecone": "assets/icons/tech/pinecone.svg",
+  "jinja": "assets/icons/tech/jinja.svg",
+  "html": "assets/icons/tech/html5.svg",
+  "css": "assets/icons/tech/css3.svg",
+  "github actions": "assets/icons/tech/github-actions.svg",
+  "nebius ai cloud": "assets/icons/tech/nebius.svg",
+  "nvidia h200": "assets/icons/tech/nvidia.svg",
+  "openai api": "assets/icons/tech/openai.svg",
+  "prisma orm": "assets/icons/tech/prisma.svg",
+  "sqlalchemy orm": "assets/icons/tech/sqlalchemy.svg",
+  "google gemini": "assets/icons/tech/gemini.svg",
+  "anthropic claude": "assets/icons/tech/anthropic.svg",
+  "figma": "assets/icons/tech/figma.svg",
+  "jira": "assets/icons/tech/jira.svg",
+  "docling": "assets/icons/tech/docling.svg",
   "opencv": "assets/icons/tech/opencv.svg",
-  "c++": "assets/icons/tech/cplusplus.svg"
+  "c++": "assets/icons/tech/cplusplus.svg",
+  "aws sam": "assets/icons/tech/aws-sam.svg",
+  "amazon sqs": "assets/icons/tech/amazon-sqs.svg",
+  "ec2": "assets/icons/tech/amazon-ec2.svg",
+  "ecs": "assets/icons/tech/amazon-ecs.svg",
+  "aws lambda": "assets/icons/tech/aws-lambda.svg",
+  "step functions": "assets/icons/tech/aws-step-functions.svg",
+  "state machines": "assets/icons/tech/aws-step-functions.svg",
+  "eventbridge": "assets/icons/tech/amazon-eventbridge.svg",
+  "parameter store": "assets/icons/tech/parameter-store.svg"
+};
+
+const techAliases = {
+  "hasura": "graphql",
+  "llms": "ai agents",
+  "microservices": "ai agents",
+  "vms": "compute engine",
+  "cloud pub/sub": "pub/sub",
+  "postgres": "postgresql",
+  "pinecone vector db": "pinecone",
+  "jinja templates": "jinja",
+  "openai / chatgpt": "openai api",
+  "docling vlm": "docling"
 };
 
 const techIcons = {
@@ -56,13 +102,15 @@ const techIcons = {
 };
 
 const techIcon = (name) => {
-  const key = name.toLowerCase();
+  const requestedKey = name.toLowerCase();
+  const key = techAliases[requestedKey] || requestedKey;
+  const className = key.replace(/[^a-z0-9]+/g, "-");
   const asset = techAssets[key];
   if (asset) {
-    return `<span class="tech-icon tech-${key.replace(/[^a-z0-9]+/g, "-")}"><img src="${asset}" alt="" decoding="async" /></span>`;
+    return `<span class="tech-icon tech-${className}"><img src="${asset}" alt="" decoding="async" /></span>`;
   }
   const svg = techIcons[key];
-  if (svg) return `<span class="tech-icon tech-${key.replace(/[^a-z0-9]+/g, "-")}">${svg}</span>`;
+  if (svg) return `<span class="tech-icon tech-${className}">${svg}</span>`;
   const letters = name.replace(/[^a-zA-Z0-9]/g, "").slice(0, 2).toUpperCase();
   return `<span class="tech-icon tech-monogram" aria-hidden="true">${letters}</span>`;
 };
@@ -97,10 +145,10 @@ document.querySelector("[data-metrics]").innerHTML = data.metrics
   .join("");
 
 document.querySelector("[data-experience]").innerHTML = data.experience
-  .map(({ period, role, company, description, tags }) => `
+  .map(({ period, role, company, companyUrl, description, tags }) => `
     <article class="timeline-row reveal">
       <div class="timeline-period">${period}</div>
-      <div class="timeline-role"><h3>${role}</h3><p>${company}</p></div>
+      <div class="timeline-role"><h3>${role}</h3><p>${companyUrl ? `<a href="${companyUrl}" target="_blank" rel="noreferrer">${company} <span aria-hidden="true">↗</span></a>` : company}</p></div>
       <div class="timeline-detail">
         <p>${description}</p>
         <div class="tag-list">${tags.map((tag) => techBadge(tag, "tag")).join("")}</div>
@@ -155,10 +203,29 @@ document.querySelector("[data-education]").innerHTML = data.education
   .join("");
 
 document.querySelector("[data-achievements]").innerHTML = data.achievements
-  .map(({ value, title, detail }) => `
+  .map(({ value, title, detail, certificateDetail, certificateUrl }) => `
     <article class="achievement-card reveal">
       <strong>${value}</strong><h3>${title}</h3><p>${detail}</p>
+      <p class="achievement-certificate-detail">${certificateDetail}</p>
+      <a class="achievement-certificate-link" href="${certificateUrl}" target="_blank" rel="noreferrer">
+        View certificate <span aria-hidden="true">↗</span>
+      </a>
     </article>`)
+  .join("");
+
+document.querySelector("[data-certifications]").innerHTML = data.certifications
+  .map(({ title, issuer, description, url }, index) => `
+    <a class="certification-card reveal" href="${url}" target="_blank" rel="noreferrer">
+      <div class="certification-card-top">
+        <span>0${index + 1}</span>
+        <span>View PDF ↗</span>
+      </div>
+      <div class="certification-card-body">
+        <p>${issuer}</p>
+        <h3>${title}</h3>
+        <p>${description}</p>
+      </div>
+    </a>`)
   .join("");
 
 const emailLink = document.querySelector("[data-email-link]");
