@@ -145,13 +145,19 @@ window.RESUME_DATA = {
   education: [
     {
       degree: "M.S. in Computer Science",
-      school: "University of Southern California · Viterbi School of Engineering",
+      institutions: [
+        { name: "University of Southern California", url: "https://usc.edu/" },
+        { name: "Viterbi School of Engineering", url: "https://viterbischool.usc.edu/" }
+      ],
       period: "Aug 2026 — Dec 2028",
       location: "Los Angeles, CA"
     },
     {
       degree: "B.E. in Electronics & Telecommunication Engineering",
-      school: "Pune Institute of Computer Technology · CGPA 8.76/10",
+      institutions: [
+        { name: "Pune Institute of Computer Technology", url: "https://pict.edu/" }
+      ],
+      detail: "CGPA 8.76/10",
       period: "Aug 2019 — Jun 2023",
       location: "Pune, India"
     }

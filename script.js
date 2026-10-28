@@ -197,9 +197,15 @@ document.querySelector("[data-toolbox]").innerHTML = data.toolbox
   .join("");
 
 document.querySelector("[data-education]").innerHTML = data.education
-  .map(({ degree, school, period, location }) => `
+  .map(({ degree, institutions, detail, period, location }) => `
     <article class="education-row">
-      <div><h3>${degree}</h3><p>${school}</p></div>
+      <div>
+        <h3>${degree}</h3>
+        <p class="education-institutions">
+          ${institutions.map(({ name, url }) => `<a href="${url}" target="_blank" rel="noreferrer">${name} <span aria-hidden="true">↗</span></a>`).join('<span class="education-separator" aria-hidden="true">·</span>')}
+          ${detail ? `<span class="education-separator" aria-hidden="true">·</span><span>${detail}</span>` : ""}
+        </p>
+      </div>
       <div class="education-meta"><span>${period}</span><span>${location}</span></div>
     </article>`)
   .join("");

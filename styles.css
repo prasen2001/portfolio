@@ -124,6 +124,12 @@ h2 { font-size: clamp(43px, 5.2vw, 76px); line-height: 1.04; letter-spacing: -.0
 .education-row { display: grid; grid-template-columns: 1fr auto; gap: 50px; padding: 28px 0; border-bottom: 1px solid var(--line); }
 .education-row h3 { font-size: 20px; letter-spacing: -.025em; }
 .education-row p { color: var(--muted); margin: 7px 0 0; }
+.education-institutions { display: flex; flex-wrap: wrap; align-items: center; gap: 5px 8px; }
+.education-institutions a { display: inline-flex; align-items: center; gap: 5px; border-bottom: 1px solid currentColor; font-weight: 500; transition: color .2s ease; }
+.education-institutions a:hover { color: var(--blue); }
+.education-institutions a span { font-size: 12px; transition: transform .2s ease; }
+.education-institutions a:hover span { transform: translate(2px, -2px); }
+.education-separator { color: rgba(24,24,23,.38); }
 .education-meta { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; color: var(--muted); font-size: 13px; }
 
 .experience { background: var(--ink); color: var(--paper); }
