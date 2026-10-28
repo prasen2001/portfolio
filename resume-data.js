@@ -24,7 +24,7 @@ window.RESUME_DATA = {
     {
       period: "Sep 2025 — Aug 2026",
       role: "Senior Software Engineer",
-      company: "Insaito · Remote",
+      company: "Insaito Inc. • Remote",
       companyUrl: "https://www.insaito.com/",
       description: "Founding engineer for Automatan.ai, owning the full product stack. Built multi-agent orchestration, RAG pipelines, and a Docling-based ingestion layer for PDFs, Word documents, text files, CSVs, and Excel workbooks. Used Docling VLM for visual document understanding and structured information extraction, processing 1,000+ documents daily at 95%+ accuracy. Used OpenAI API inference alongside model deployment on Nebius AI Cloud with NVIDIA H200 GPUs.",
       tags: [
@@ -37,7 +37,7 @@ window.RESUME_DATA = {
     {
       period: "Jul 2023 — Jun 2025",
       role: "Software Engineer",
-      company: "Fold Health Inc. · Pune, India",
+      company: "Fold Health Inc. • Pune, India",
       companyUrl: "https://fold.health",
       description: "Built healthcare workflow automation used by 200+ providers across 10+ organizations, supporting 1.7M+ active lives. Designed a provider-agnostic LLM inference layer that let users choose between OpenAI, Gemini, Claude, and other model APIs. Scaled concurrent workflow execution from 20 to 200 while reducing LLM inference costs by up to 80% and API calls by 3×.",
       tags: [
@@ -59,8 +59,8 @@ window.RESUME_DATA = {
     },
     {
       number: "02",
-      title: "Healthcare workflow automation",
-      description: "A scalable visual automation system with 40+ triggers and 100+ filters that saved providers 75% of their time while supporting 1.7M+ active lives.",
+      title: "Healthcare workflow automation at Fold Health",
+      description: "At Fold Health, I helped build a scalable visual automation system with 40+ triggers and 100+ filters that saved providers 75% of their time while supporting 1.7M+ active lives.",
       category: "Cloud / Healthcare",
       color: "orange",
       link: "https://fold.health"
@@ -192,5 +192,5 @@ window.RESUME_DATA = {
     { label: "LinkedIn", url: "https://linkedin.com/in/prasenjeet-tambe-478021193" },
     { label: "GitHub", url: "https://github.com/prasen2001" }
   ],
-  resumeUrl: "assets/documents/resume/Prasenjeet_Tambe_Resume.pdf"
+  resumeUrl: null
 };

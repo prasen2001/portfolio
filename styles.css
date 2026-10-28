@@ -15,6 +15,7 @@
 
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
+[hidden] { display: none !important; }
 section[id] { scroll-margin-top: 84px; }
 body {
   margin: 0;
@@ -132,7 +133,7 @@ h2 { font-size: clamp(43px, 5.2vw, 76px); line-height: 1.04; letter-spacing: -.0
 .tag .tech-flask img { filter: invert(1); }
 .tag .tech-nebius-ai-cloud img, .tag .tech-nvidia-h200 img { filter: brightness(0) invert(1); }
 .tag .tech-openai-api img, .tag .tech-prisma-orm img { filter: brightness(0) invert(1); }
-.tag .tech-google-gemini img, .tag .tech-anthropic-claude img { filter: brightness(0) invert(1); }
+.tag .tech-anthropic-claude img { filter: brightness(0) invert(1); }
 
 .project-grid { display: grid; grid-template-columns: 1.15fr .85fr; gap: 20px; }
 .project-card { min-height: 460px; padding: 32px; display: flex; flex-direction: column; justify-content: space-between; color: white; position: relative; overflow: hidden; border-radius: 4px; }

@@ -37,11 +37,11 @@ const techAssets = {
   "css": "assets/icons/tech/css3.svg",
   "github actions": "assets/icons/tech/github-actions.svg",
   "nebius ai cloud": "assets/icons/tech/nebius.svg",
-  "nvidia h200": "assets/icons/tech/nvidia.svg",
+  "nvidia h200": "assets/icons/tech/nvidia.svg?v=20261027",
   "openai api": "assets/icons/tech/openai.svg",
   "prisma orm": "assets/icons/tech/prisma.svg",
   "sqlalchemy orm": "assets/icons/tech/sqlalchemy.svg",
-  "google gemini": "assets/icons/tech/gemini.svg",
+  "google gemini": "assets/icons/tech/gemini.svg?v=20261027",
   "anthropic claude": "assets/icons/tech/anthropic.svg",
   "figma": "assets/icons/tech/figma.svg",
   "jira": "assets/icons/tech/jira.svg",
@@ -240,7 +240,9 @@ if (data.resumeUrl) {
   const resumeLink = document.querySelector("[data-resume-link]");
   resumeLink.hidden = false;
   resumeLink.href = data.resumeUrl;
-  document.querySelector("[data-header-resume]").href = data.resumeUrl;
+  const headerResumeLink = document.querySelector("[data-header-resume]");
+  headerResumeLink.hidden = false;
+  headerResumeLink.href = data.resumeUrl;
 }
 
 document.querySelector("[data-header-email]").href = `mailto:${data.email}`;
