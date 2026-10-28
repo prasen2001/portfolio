@@ -69,7 +69,7 @@ button { color: inherit; font: inherit; }
 .usc-school-link:hover { color: var(--ink); border-color: var(--usc-cardinal); }
 .usc-school-link:focus-visible { outline: 2px solid var(--usc-cardinal); outline-offset: 4px; }
 .eyebrow { display: flex; align-items: flex-start; gap: 12px; margin: 0; }
-.status-dot { flex: 0 0 8px; width: 8px; height: 8px; margin-top: 6px; border-radius: 50%; background: #3a9c67; box-shadow: 0 0 0 5px rgba(58, 156, 103, .12); }
+.status-dot { flex: 0 0 8px; width: 8px; height: 8px; margin-top: 6px; border-radius: 50%; background: #3a9c67; box-shadow: 0 0 0 5px rgba(58, 156, 103, .12); align-self: center;}
 .availability-status-group { display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; }
 .availability-cta { display: inline-flex; align-items: center; gap: 6px; min-height: 26px; margin-left: 3px; padding: 4px 9px; border: 1px solid var(--ink); border-radius: 999px; background: var(--ink); color: var(--paper); font: 700 10px/1 var(--display); letter-spacing: .1em; white-space: nowrap; transition: color .2s ease, background .2s ease, border-color .2s ease, transform .2s ease; }
 .availability-cta:hover { background: var(--usc-cardinal); color: var(--usc-gold); border-color: var(--usc-cardinal); transform: translateY(-1px); }
