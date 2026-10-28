@@ -288,7 +288,13 @@ h2 { font-size: clamp(43px, 5.2vw, 76px); line-height: 1.04; letter-spacing: -.0
   .timeline-role { margin: 18px 0; }
   .project-card { min-height: 420px; padding: 25px; }
   .contact-footer { align-items: flex-start; flex-direction: column; gap: 22px; }
-  .contact-email { font-size: 22px; word-break: break-all; }
+  .contact-card { padding-inline: 20px; }
+  .contact-email {
+    max-width: 100%;
+    gap: 7px;
+    font-size: clamp(12px, 4.1vw, 22px);
+    white-space: nowrap;
+  }
   .education-row { display: block; }
   .education-meta { align-items: flex-start; margin-top: 15px; }
   .recruiter-actions { grid-template-columns: 1fr; }
