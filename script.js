@@ -120,7 +120,9 @@ const techBadge = (name, className = "tech-badge") =>
 
 setText("[data-person-name]", data.name);
 setText("[data-initials]", data.initials);
-setText("[data-availability]", data.availability);
+setText("[data-availability-degree]", data.availability.degree);
+setText("[data-availability-school]", data.availability.school);
+setText("[data-availability-status]", data.availability.status);
 setText("[data-location]", data.location);
 setText("[data-focus]", data.focus);
 setText("[data-summary]", data.summary);
@@ -233,7 +235,13 @@ emailLink.href = `mailto:${data.email}`;
 emailLink.firstChild.textContent = `${data.email} `;
 
 document.querySelector("[data-socials]").innerHTML = data.socials
-  .map(({ label, url }) => `<a href="${url}" ${url !== "#" ? 'target="_blank" rel="noreferrer"' : ""}>${label}</a>`)
+  .map(({ label, url }) => {
+    const iconName = label.toLowerCase();
+    return `<a href="${url}" aria-label="${label}" ${url !== "#" ? 'target="_blank" rel="noreferrer"' : ""}>
+      <img src="assets/icons/social/${iconName}-white.svg" alt="" aria-hidden="true" />
+      <span>${label}</span>
+    </a>`;
+  })
   .join("");
 
 if (data.resumeUrl) {

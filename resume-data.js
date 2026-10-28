@@ -5,7 +5,11 @@ window.RESUME_DATA = {
   initials: "PT",
   title: "Software Engineer · AI Systems & Full-Stack Products",
   location: "Los Angeles, CA",
-  availability: "MS in Computer Science at USC · Open to opportunities",
+  availability: {
+    degree: "M.S. in Computer Science",
+    school: "University of Southern California",
+    status: "Open to opportunities"
+  },
   email: "development.prasenjeet@gmail.com",
   summary:
     "Software engineer building production AI platforms, scalable automation systems, and cloud-native products—from frontend experiences to infrastructure.",

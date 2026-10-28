@@ -8,6 +8,8 @@
   --violet: #8664d8;
   --line: rgba(24, 24, 23, 0.18);
   --muted: #66645f;
+  --usc-cardinal: #990000;
+  --usc-gold: #ffcc00;
   --display: "Manrope", sans-serif;
   --body: "DM Sans", sans-serif;
   --shell: min(1180px, calc(100vw - 48px));
@@ -50,16 +52,29 @@ button { color: inherit; font: inherit; }
 .recruiter-action { display: inline-flex; align-items: center; gap: 7px; min-height: 38px; padding: 8px 11px; border: 1px solid var(--line); border-radius: 999px; background: rgba(255,255,255,.28); transition: .2s ease; white-space: nowrap; }
 .recruiter-action:hover { background: var(--white); border-color: rgba(24,24,23,.35); transform: translateY(-1px); }
 .recruiter-action svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
-.recruiter-action:nth-child(3) svg { fill: currentColor; stroke: none; }
+.social-brand-icon { flex: 0 0 auto; width: 17px; height: 17px; object-fit: contain; }
 .recruiter-action-primary { background: var(--ink); color: var(--paper); border-color: var(--ink); }
 .recruiter-action-primary:hover { background: var(--blue); color: white; border-color: var(--blue); }
+.recruiter-action-linkedin { background: white; color: #0a66c2; border-color: rgba(10,102,194,.38); }
+.recruiter-action-linkedin:hover { background: #eef6fc; color: #0a66c2; border-color: #0a66c2; }
 .menu-button { display: none; border: 0; background: transparent; padding: 8px; }
 .menu-button span { display: block; width: 24px; height: 1px; background: currentColor; margin: 6px 0; }
 
 .hero { min-height: 760px; display: grid; grid-template-columns: 1.45fr .55fr; align-items: center; gap: 8vw; padding-block: 80px 110px; }
 .eyebrow, .section-index { text-transform: uppercase; letter-spacing: .16em; font-size: 12px; font-weight: 700; }
-.eyebrow { display: flex; align-items: center; gap: 10px; margin: 0 0 32px; }
-.status-dot { width: 8px; height: 8px; border-radius: 50%; background: #3a9c67; box-shadow: 0 0 0 5px rgba(58, 156, 103, .12); }
+.hero-status-block { display: grid; gap: 14px; margin: 0 0 32px; }
+.usc-affiliation { display: flex; flex-wrap: wrap; align-items: baseline; gap: 5px 7px; margin: 0; text-transform: uppercase; font-size: 12px; font-weight: 700; letter-spacing: .13em; line-height: 1.6; }
+.affiliation-at { color: var(--muted); }
+.usc-school-link { color: var(--usc-cardinal); font-weight: 800; letter-spacing: .08em; border-bottom: 3px solid var(--usc-gold); padding-bottom: 1px; transition: color .2s ease, border-color .2s ease; }
+.usc-school-link:hover { color: var(--ink); border-color: var(--usc-cardinal); }
+.usc-school-link:focus-visible { outline: 2px solid var(--usc-cardinal); outline-offset: 4px; }
+.eyebrow { display: flex; align-items: flex-start; gap: 12px; margin: 0; }
+.status-dot { flex: 0 0 8px; width: 8px; height: 8px; margin-top: 6px; border-radius: 50%; background: #3a9c67; box-shadow: 0 0 0 5px rgba(58, 156, 103, .12); }
+.availability-status-group { display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; }
+.availability-cta { display: inline-flex; align-items: center; gap: 6px; min-height: 26px; margin-left: 3px; padding: 4px 9px; border: 1px solid var(--ink); border-radius: 999px; background: var(--ink); color: var(--paper); font: 700 10px/1 var(--display); letter-spacing: .1em; white-space: nowrap; transition: color .2s ease, background .2s ease, border-color .2s ease, transform .2s ease; }
+.availability-cta:hover { background: var(--usc-cardinal); color: var(--usc-gold); border-color: var(--usc-cardinal); transform: translateY(-1px); }
+.availability-cta span { font-size: 12px; transition: transform .2s ease; }
+.availability-cta:hover span { transform: translate(2px, -2px); }
 h1, h2, h3 { font-family: var(--display); margin: 0; }
 h1 { max-width: 850px; font-size: clamp(58px, 7.2vw, 108px); line-height: .97; letter-spacing: -.065em; font-weight: 700; }
 h1 em { color: var(--blue); font-style: normal; }
@@ -219,8 +234,10 @@ h2 { font-size: clamp(43px, 5.2vw, 76px); line-height: 1.04; letter-spacing: -.0
 .contact-card > p:not(.section-index) { max-width: 560px; font-size: 18px; line-height: 1.6; opacity: .75; }
 .contact-email { display: inline-flex; gap: 18px; font: 600 clamp(24px, 4vw, 49px)/1.2 var(--display); letter-spacing: -.04em; margin-top: 55px; border-bottom: 2px solid rgba(255,255,255,.5); padding-bottom: 6px; }
 .contact-footer { display: flex; justify-content: space-between; align-items: center; padding-top: 70px; margin-top: 80px; border-top: 1px solid rgba(255,255,255,.25); font-size: 13px; }
-.social-links { display: flex; gap: 24px; }
-.social-links a { border-bottom: 1px solid rgba(255,255,255,.5); }
+.social-links { display: flex; flex-wrap: wrap; gap: 12px; }
+.social-links a { display: inline-flex; align-items: center; gap: 9px; min-height: 40px; padding: 8px 13px; border: 1px solid rgba(255,255,255,.42); border-radius: 999px; transition: background .2s ease, border-color .2s ease, transform .2s ease; }
+.social-links a:hover { background: rgba(255,255,255,.12); border-color: white; transform: translateY(-2px); }
+.social-links img { width: 19px; height: 19px; object-fit: contain; }
 .achievement-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
 .achievement-card { min-height: 280px; padding: 28px; border: 1px solid var(--line); display: flex; flex-direction: column; }
 .achievement-card strong { font: 700 52px/1 var(--display); letter-spacing: -.06em; color: var(--blue); }
@@ -278,6 +295,10 @@ h2 { font-size: clamp(43px, 5.2vw, 76px); line-height: 1.04; letter-spacing: -.0
 @media (max-width: 560px) {
   h1 { font-size: clamp(48px, 15vw, 70px); }
   .hero-intro { font-size: 17px; }
+  .usc-affiliation { font-size: clamp(10px, 3.25vw, 12px); gap: 4px 6px; letter-spacing: .1em; }
+  .usc-school-link { letter-spacing: .045em; }
+  .availability-status-group { gap: 6px; font-size: 10px; letter-spacing: .11em; }
+  .availability-cta { min-height: 24px; margin-left: 0; padding: 4px 7px; font-size: 9px; letter-spacing: .06em; }
   .hero-actions { align-items: flex-start; flex-direction: column; }
   .hero-aside { display: block; }
   .hero-meta { padding-block: 16px; }
