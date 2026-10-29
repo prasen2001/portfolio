@@ -13,10 +13,12 @@
       href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles.css?v=20261027-10" />
+    <link rel="stylesheet" href="styles.css?v=20261028-24" />
   </head>
   <body>
     <div class="noise" aria-hidden="true"></div>
+    <div class="site-grid-bg" aria-hidden="true"></div>
+    <canvas class="site-spatial-particles" data-hero-spatial aria-hidden="true"></canvas>
     <header class="site-header">
       <a class="brand" href="#top" aria-label="Home">
         <span class="brand-mark">P</span>
@@ -60,7 +62,7 @@
         <div class="hero-copy reveal">
           <div class="hero-status-block">
             <p class="usc-affiliation">
-              <span data-availability-degree>M.S. in Computer Science</span>
+              <span data-availability-degree>Pursuing M.S. in Computer Science</span>
               <span class="affiliation-at">at</span>
               <a class="usc-school-link" href="https://www.usc.edu/" target="_blank" rel="noreferrer" data-availability-school>University of Southern California</a>
             </p>
@@ -72,6 +74,7 @@
               </span>
             </p>
           </div>
+          <p class="hero-name"><span>Prasenjeet</span> Tambe</p>
           <h1 id="hero-title">I build AI systems that move from <em>idea to impact.</em></h1>
           <p class="hero-intro" data-summary>
             A thoughtful professional focused on solving meaningful problems, building high-quality products, and creating measurable impact.
@@ -83,10 +86,21 @@
         </div>
         <div class="hero-aside reveal delay-1" aria-label="Professional snapshot">
           <div class="portrait-card">
-            <div class="portrait-orbit orbit-one"></div>
-            <div class="portrait-orbit orbit-two"></div>
-            <div class="portrait-initials" data-initials>PK</div>
-            <p class="portrait-label">Ideas<br />into impact.</p>
+            <picture>
+              <source srcset="assets/images/photographs/portfolio-profile.webp" type="image/webp" />
+              <img
+                class="portrait-photo"
+                src="assets/images/photographs/portfolio-profile.jpeg"
+                alt="Prasenjeet Tambe working with headphones in a modern workspace"
+                width="3016"
+                height="2262"
+                fetchpriority="high"
+              />
+            </picture>
+          </div>
+          <div class="hero-meta hero-meta-name">
+            <span>Name</span>
+            <strong>Prasenjeet Tambe</strong>
           </div>
           <div class="hero-meta">
             <span>Based in</span>
@@ -201,7 +215,7 @@
       </section>
     </main>
 
-    <script src="resume-data.js?v=20261027-10"></script>
-    <script src="script.js?v=20261027-10"></script>
+    <script src="resume-data.js?v=20261028-6"></script>
+    <script src="script.js?v=20261028-15"></script>
   </body>
 </html>

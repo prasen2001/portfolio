@@ -162,9 +162,121 @@ document.querySelector("[data-projects]").innerHTML = data.projects
   .map(({ number, title, description, category, color, link }) => {
     const tag = link !== "#" ? "a" : "article";
     const attributes = link !== "#" ? `href="${link}" target="_blank" rel="noreferrer"` : "";
+    const visual = color === "blue" ? `
+      <div class="automation-visual" aria-hidden="true">
+        <svg viewBox="0 0 640 205" preserveAspectRatio="xMidYMid meet">
+          <g class="automation-edges">
+            <path d="M118 103C146 103 146 53 178 53" />
+            <path d="M118 103C146 103 146 153 178 153" />
+            <path d="M282 53C318 53 318 103 350 103" />
+            <path d="M282 153C318 153 318 103 350 103" />
+            <path class="automation-human-edge" d="M402 52V76" />
+            <path d="M454 103H510" />
+          </g>
+
+          <g class="automation-node automation-node-file" transform="translate(18 76)">
+            <rect class="automation-node-shell" width="100" height="54" rx="13" />
+            <path class="automation-node-icon" d="M17 14h13l8 8v18H17zm13 0v8h8" />
+            <text x="47" y="25">FILE</text><text class="automation-node-sub" x="47" y="39">input</text>
+          </g>
+          <g class="automation-node automation-node-parse" transform="translate(178 26)">
+            <rect class="automation-node-shell" width="104" height="54" rx="13" />
+            <path class="automation-node-icon" d="M17 16h20M17 23h16M17 30h12" />
+            <text x="47" y="25">PARSE</text><text class="automation-node-sub" x="47" y="39">Docling</text>
+          </g>
+          <g class="automation-node automation-node-rag" transform="translate(178 126)">
+            <rect class="automation-node-shell" width="104" height="54" rx="13" />
+            <circle class="automation-node-icon" cx="22" cy="27" r="10" />
+            <path class="automation-node-icon" d="m29 34 8 8M18 27h8M22 23v8" />
+            <text x="47" y="25">RAG</text><text class="automation-node-sub" x="47" y="39">retrieve</text>
+          </g>
+          <g class="automation-node automation-node-agent" transform="translate(350 76)">
+            <rect class="automation-node-shell" width="104" height="54" rx="13" />
+            <circle class="automation-node-icon" cx="25" cy="27" r="11" />
+            <path class="automation-node-icon" d="M25 12v5m0 20v5M10 27h5m20 0h5m-4.4-10.6-3.6 3.6m-14 14-3.6 3.6m21.2 0L32 34M18 20l-3.6-3.6" />
+            <text x="48" y="25">AGENT</text><text class="automation-node-sub" x="48" y="39">process</text>
+          </g>
+          <g class="automation-node automation-node-human" transform="translate(350 2)">
+            <rect class="automation-node-shell" width="104" height="50" rx="13" />
+            <circle class="automation-node-icon" cx="24" cy="17" r="6" />
+            <path class="automation-node-icon" d="M13 39c1-8 5-12 11-12s10 4 11 12" />
+            <text x="47" y="22">HUMAN</text><text class="automation-node-sub" x="47" y="36">insight</text>
+          </g>
+          <g class="automation-node automation-node-output" transform="translate(510 76)">
+            <rect class="automation-node-shell" width="112" height="54" rx="13" />
+            <circle class="automation-output-disc" cx="24" cy="27" r="11" />
+            <path class="automation-output-check" d="m18 27 4 4 8-9" />
+            <text x="46" y="25">OUTPUT</text><text class="automation-node-sub" x="46" y="39">verified</text>
+          </g>
+
+          <circle class="workflow-packet workflow-packet-a" r="4">
+            <animateMotion dur="3.6s" repeatCount="indefinite" path="M118 103C146 103 146 53 178 53M178 53H282C318 53 318 103 350 103H454H510" />
+          </circle>
+          <circle class="workflow-packet workflow-packet-b" r="4">
+            <animateMotion dur="3.6s" begin="-1.8s" repeatCount="indefinite" path="M118 103C146 103 146 153 178 153M178 153H282C318 153 318 103 350 103H454H510" />
+          </circle>
+        </svg>
+        <div class="automation-status"><span></span> Live agent workflow <b>Human-in-the-loop enabled</b></div>
+      </div>` : color === "healthcare" ? `
+      <div class="healthcare-visual" aria-hidden="true">
+        <svg class="healthcare-heart-icon" viewBox="0 0 116 96" preserveAspectRatio="xMidYMid meet">
+          <g class="healthcare-heart">
+            <path d="M50 82C33 69 9 53 9 30 9 14 21 4 36 4c9 0 17 5 22 13C63 9 71 4 80 4c15 0 27 10 27 26 0 23-24 39-41 52l-8 6-8-6Z" />
+            <path class="healthcare-heart-cross" d="M52 27h12v10h10v12H64v10H52V49H42V37h10Z" />
+          </g>
+        </svg>
+        <svg class="healthcare-ecg-visual" viewBox="0 0 360 70" preserveAspectRatio="none">
+          <g class="healthcare-ecg-track">
+            <path class="healthcare-ecg-cycle" transform="translate(-180)" d="M0 38h24c5 0 7-6 12-6s7 6 12 6h18l6 3 8-5 7-28 7 53 8-23h14c7 0 12-12 22-12s15 12 24 12h18" />
+            <path class="healthcare-ecg-cycle" d="M0 38h24c5 0 7-6 12-6s7 6 12 6h18l6 3 8-5 7-28 7 53 8-23h14c7 0 12-12 22-12s15 12 24 12h18" />
+            <path class="healthcare-ecg-cycle" transform="translate(180)" d="M0 38h24c5 0 7-6 12-6s7 6 12 6h18l6 3 8-5 7-28 7 53 8-23h14c7 0 12-12 22-12s15 12 24 12h18" />
+            <path class="healthcare-ecg-cycle" transform="translate(360)" d="M0 38h24c5 0 7-6 12-6s7 6 12 6h18l6 3 8-5 7-28 7 53 8-23h14c7 0 12-12 22-12s15 12 24 12h18" />
+            <path class="healthcare-ecg-cycle" transform="translate(540)" d="M0 38h24c5 0 7-6 12-6s7 6 12 6h18l6 3 8-5 7-28 7 53 8-23h14c7 0 12-12 22-12s15 12 24 12h18" />
+          </g>
+        </svg>
+        <div class="healthcare-chips">
+          <span>40+ triggers</span>
+          <span>100+ filters</span>
+        </div>
+      </div>` : color === "violet" ? `
+      <div class="pulse-monitor-visual" aria-hidden="true">
+        <svg viewBox="0 0 420 225" preserveAspectRatio="xMidYMid meet">
+          <rect class="pulse-monitor-frame" x="38" y="17" width="344" height="178" rx="15" />
+          <rect class="pulse-monitor-screen" x="52" y="31" width="316" height="145" rx="8" />
+          <rect class="pulse-camera" x="190" y="8" width="40" height="17" rx="7" />
+          <circle class="pulse-camera-lens" cx="210" cy="16.5" r="4" />
+          <path class="pulse-camera-guide" d="M205 25 181 52M215 25l24 27" />
+
+          <g class="pulse-person">
+            <path class="pulse-person-shoulders" d="M135 176c8-38 31-55 75-55s67 17 75 55Z" />
+            <rect class="pulse-person-neck" x="195" y="108" width="30" height="32" rx="12" />
+            <ellipse class="pulse-person-face" cx="210" cy="85" rx="37" ry="45" />
+            <path class="pulse-person-hair" d="M174 82c-3-29 10-46 35-47 25-1 40 16 38 44-8-5-14-13-18-25-14 14-31 21-51 21Z" />
+            <circle class="pulse-person-eye" cx="196" cy="88" r="2" />
+            <circle class="pulse-person-eye" cx="224" cy="88" r="2" />
+            <path class="pulse-person-mouth" d="M202 105c5 3 11 3 16 0" />
+          </g>
+
+          <text class="pulse-roi-label" x="181" y="52">FOREHEAD ROI</text>
+          <rect class="pulse-roi" x="183" y="56" width="54" height="23" rx="4" />
+          <circle class="pulse-roi-point" cx="210" cy="67.5" r="3" />
+          <line class="pulse-scan-line" x1="57" y1="43" x2="363" y2="43" />
+
+          <g class="pulse-reading">
+            <text x="289" y="50">PULSE</text>
+            <text class="pulse-bpm" x="289" y="70">72</text>
+            <text class="pulse-bpm-unit" x="329" y="70">BPM</text>
+          </g>
+          <path class="pulse-signal" d="M72 150h38l7-5 7 5h18l5 4 6-4 6-24 8 43 8-19h19c8 0 13-11 23-11s16 11 25 11h27l6-4 7 4h56" />
+          <path class="pulse-laptop-base" d="M20 195h380l14 14H6Z" />
+          <path class="pulse-laptop-detail" d="M174 200h72l-5 5h-62Z" />
+        </svg>
+        <div class="pulse-monitor-status"><span></span> Camera active <b>Forehead signal → BPM estimate</b></div>
+      </div>` : "";
     return `
     <${tag} class="project-card ${color} reveal" ${attributes}>
       <div class="project-top"><span>${number}</span><span>${category}</span></div>
+      ${visual}
       <div class="project-copy"><h3>${title}</h3><p>${description}</p></div>
       <span class="project-arrow" aria-hidden="true">↗</span>
     </${tag}>`;
@@ -213,7 +325,19 @@ document.querySelector("[data-education]").innerHTML = data.education
 document.querySelector("[data-achievements]").innerHTML = data.achievements
   .map(({ value, title, detail, certificateDetail, certificateUrl }) => `
     <article class="achievement-card reveal">
-      <strong>${value}</strong><h3>${title}</h3><p>${detail}</p>
+      <div class="achievement-rank" aria-label="National rank ${value.replace("#", "")}">
+        <svg class="achievement-medal" viewBox="0 0 64 74" aria-hidden="true">
+          <path class="achievement-medal-ribbon ribbon-left" d="M13 3h17l6 32-15 8z" />
+          <path class="achievement-medal-ribbon ribbon-right" d="M34 3h17L43 43l-15-8z" />
+          <circle class="achievement-medal-disc" cx="32" cy="49" r="20" />
+          <path class="achievement-medal-star" d="m32 36 3.8 7.7 8.5 1.2-6.1 6 1.4 8.4-7.6-4-7.6 4 1.4-8.4-6.1-6 8.5-1.2z" />
+        </svg>
+        <div class="achievement-rank-copy">
+          <span>National rank</span>
+          <strong class="achievement-rank-value">${value}</strong>
+        </div>
+      </div>
+      <h3>${title}</h3><p>${detail}</p>
       <p class="achievement-certificate-detail">${certificateDetail}</p>
       <a class="achievement-certificate-link" href="${certificateUrl}" target="_blank" rel="noreferrer">
         View certificate <span aria-hidden="true">↗</span>
@@ -285,3 +409,185 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.12 });
 
 document.querySelectorAll(".reveal").forEach((element) => observer.observe(element));
+
+const initHeroSpatialBackground = () => {
+  const canvas = document.querySelector("[data-hero-spatial]");
+  const context = canvas?.getContext("2d");
+  if (!canvas || !context) return;
+
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const palette = [[33, 70, 217], [7, 139, 120], [153, 0, 0], [184, 128, 0]];
+  let width = 0;
+  let height = 0;
+  let points = [];
+  let targetTiltX = 0;
+  let targetTiltY = 0;
+  let tiltX = 0;
+  let tiltY = 0;
+  let animationFrame = 0;
+  let active = true;
+
+  const createPoints = () => {
+    const count = width < 700 ? 28 : 52;
+    points = Array.from({ length: count }, (_, index) => ({
+      x: (Math.random() - .5) * width * .95,
+      y: (Math.random() - .5) * height * .82,
+      z: Math.random() * 560 - 240,
+      size: 1.5 + Math.random() * 2.8,
+      color: palette[index % palette.length]
+    }));
+  };
+
+  const resize = () => {
+    const nextWidth = Math.max(1, Math.round(window.innerWidth));
+    const nextHeight = Math.max(1, Math.round(window.innerHeight));
+    if (nextWidth === width && nextHeight === height) return;
+    width = nextWidth;
+    height = nextHeight;
+    const pixelRatio = Math.min(window.devicePixelRatio || 1, 1.5);
+    canvas.width = Math.round(width * pixelRatio);
+    canvas.height = Math.round(height * pixelRatio);
+    canvas.style.width = `${width}px`;
+    canvas.style.height = `${height}px`;
+    context.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
+    createPoints();
+    if (reducedMotion.matches) render(0);
+  };
+
+  const project = (point, time) => {
+    const rotationY = tiltY + time * .000035;
+    const rotationX = tiltX - .08;
+    const cosY = Math.cos(rotationY);
+    const sinY = Math.sin(rotationY);
+    const cosX = Math.cos(rotationX);
+    const sinX = Math.sin(rotationX);
+    const xAfterY = point.x * cosY - point.z * sinY;
+    const zAfterY = point.x * sinY + point.z * cosY;
+    const yAfterX = point.y * cosX - zAfterY * sinX;
+    const zAfterX = point.y * sinX + zAfterY * cosX;
+    const depth = 650 + zAfterX;
+    if (depth < 90) return null;
+    const scale = 520 / depth;
+    return {
+      x: width * .58 + xAfterY * scale,
+      y: height * .5 + yAfterX * scale,
+      scale,
+      depth: zAfterX
+    };
+  };
+
+  const drawOrbitalCore = (time) => {
+    const centerX = width * .72;
+    const centerY = height * .38;
+    const phase = time * .00018 + tiltY * 2.5;
+    const rings = [
+      { radiusX: 112, radiusY: 28, rotation: phase, color: "rgba(33,70,217,.28)" },
+      { radiusX: 92, radiusY: 38, rotation: phase + Math.PI / 2.7, color: "rgba(7,139,120,.34)" },
+      { radiusX: 72, radiusY: 48, rotation: phase - Math.PI / 2.2, color: "rgba(153,0,0,.2)" }
+    ];
+    context.save();
+    context.lineWidth = 1.25;
+    rings.forEach((ring, index) => {
+      context.strokeStyle = ring.color;
+      context.beginPath();
+      context.ellipse(centerX, centerY, ring.radiusX, ring.radiusY, ring.rotation, 0, Math.PI * 2);
+      context.stroke();
+      const nodePhase = phase * (index % 2 ? -1.3 : 1.1) + index * 1.9;
+      const cosine = Math.cos(nodePhase);
+      const sine = Math.sin(nodePhase);
+      const nodeX = centerX + ring.radiusX * cosine * Math.cos(ring.rotation) - ring.radiusY * sine * Math.sin(ring.rotation);
+      const nodeY = centerY + ring.radiusX * cosine * Math.sin(ring.rotation) + ring.radiusY * sine * Math.cos(ring.rotation);
+      const [red, green, blue] = palette[index];
+      context.shadowColor = `rgba(${red},${green},${blue},.62)`;
+      context.shadowBlur = 15;
+      context.fillStyle = `rgba(${red},${green},${blue},.82)`;
+      context.beginPath();
+      context.arc(nodeX, nodeY, 3.5 + index, 0, Math.PI * 2);
+      context.fill();
+    });
+    const glow = context.createRadialGradient(centerX, centerY, 0, centerX, centerY, 32);
+    glow.addColorStop(0, "rgba(7,139,120,.32)");
+    glow.addColorStop(1, "rgba(7,139,120,0)");
+    context.fillStyle = glow;
+    context.beginPath();
+    context.arc(centerX, centerY, 32, 0, Math.PI * 2);
+    context.fill();
+    context.restore();
+  };
+
+  const render = (time) => {
+    tiltX += (targetTiltX - tiltX) * .045;
+    tiltY += (targetTiltY - tiltY) * .045;
+    context.clearRect(0, 0, width, height);
+    drawOrbitalCore(time);
+
+    const projected = points.map((point) => ({ point, screen: project(point, time) })).filter(({ screen }) => screen);
+    const connectionLimit = width < 700 ? 145 : 190;
+    for (let first = 0; first < projected.length; first += 1) {
+      for (let second = first + 1; second < projected.length; second += 1) {
+        const a = projected[first];
+        const b = projected[second];
+        const dx = a.point.x - b.point.x;
+        const dy = a.point.y - b.point.y;
+        const dz = a.point.z - b.point.z;
+        const distance = Math.hypot(dx, dy, dz);
+        if (distance > connectionLimit) continue;
+        const alpha = (1 - distance / connectionLimit) * .28;
+        context.strokeStyle = `rgba(33, 70, 217, ${alpha})`;
+        context.lineWidth = .75;
+        context.beginPath();
+        context.moveTo(a.screen.x, a.screen.y);
+        context.lineTo(b.screen.x, b.screen.y);
+        context.stroke();
+      }
+    }
+
+    projected.sort((a, b) => b.screen.depth - a.screen.depth).forEach(({ point, screen }) => {
+      const radius = Math.max(.7, point.size * screen.scale);
+      const [red, green, blue] = point.color;
+      context.save();
+      context.shadowColor = `rgba(${red}, ${green}, ${blue}, .42)`;
+      context.shadowBlur = 14;
+      context.fillStyle = `rgba(${red}, ${green}, ${blue}, ${Math.min(.92, .58 + screen.scale * .3)})`;
+      context.beginPath();
+      context.arc(screen.x, screen.y, radius, 0, Math.PI * 2);
+      context.fill();
+      context.restore();
+    });
+  };
+
+  const animate = (time) => {
+    animationFrame = 0;
+    if (!active || document.hidden || reducedMotion.matches) return;
+    render(time);
+    animationFrame = requestAnimationFrame(animate);
+  };
+
+  const start = () => {
+    if (!animationFrame && active && !document.hidden && !reducedMotion.matches) {
+      animationFrame = requestAnimationFrame(animate);
+    }
+  };
+
+  window.addEventListener("pointermove", (event) => {
+    targetTiltY = (event.clientX / width - .5) * .24;
+    targetTiltX = (event.clientY / height - .5) * -.14;
+  });
+  window.addEventListener("resize", resize);
+  document.addEventListener("visibilitychange", start);
+  reducedMotion.addEventListener("change", () => {
+    if (reducedMotion.matches) {
+      cancelAnimationFrame(animationFrame);
+      animationFrame = 0;
+      render(0);
+    } else {
+      start();
+    }
+  });
+
+  resize();
+  if (reducedMotion.matches) render(0);
+  else start();
+};
+
+initHeroSpatialBackground();

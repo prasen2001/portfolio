@@ -6,7 +6,7 @@ window.RESUME_DATA = {
   title: "Software Engineer · AI Systems & Full-Stack Products",
   location: "Los Angeles, CA",
   availability: {
-    degree: "M.S. in Computer Science",
+    degree: "Pursuing M.S. in Computer Science",
     school: "University of Southern California",
     status: "Open to opportunities"
   },
@@ -30,7 +30,7 @@ window.RESUME_DATA = {
       role: "Senior Software Engineer",
       company: "Insaito Inc. • Remote",
       companyUrl: "https://www.insaito.com/",
-      description: "Founding engineer for Automatan.ai, owning the full product stack. Built multi-agent orchestration, RAG pipelines, and a Docling-based ingestion layer for PDFs, Word documents, text files, CSVs, and Excel workbooks. Used Docling VLM for visual document understanding and structured information extraction, processing 1,000+ documents daily at 95%+ accuracy. Used OpenAI API inference alongside model deployment on Nebius AI Cloud with NVIDIA H200 GPUs.",
+      description: "Founding engineer for <a href=\"https://automatan.ai/\" target=\"_blank\" rel=\"noreferrer\">Automatan.ai</a>, owning the full product stack. Built multi-agent orchestration, RAG pipelines, and a Docling-based ingestion layer for PDFs, Word documents, text files, CSVs, and Excel workbooks. Used Docling VLM for visual document understanding and structured information extraction, processing 1,000+ documents daily at 95%+ accuracy. Used OpenAI API inference alongside model deployment on Nebius AI Cloud with NVIDIA H200 GPUs.",
       tags: [
         "React", "Python", "Flask", "Jinja", "HTML", "CSS", "JavaScript", "GitHub Actions",
         "AI agents", "RAG", "Docling", "Docling VLM", "OpenAI API", "Pinecone", "Secret Manager", "Cloud Run", "Compute Engine", "Pub/Sub",
@@ -56,7 +56,7 @@ window.RESUME_DATA = {
     {
       number: "01",
       title: "Automatan.ai at Insaito",
-      description: "At Insaito, I helped build an end-to-end AI agent platform with multi-agent execution, document-grounded RAG, configurable intelligence pipelines, and real-time workflow status.",
+      description: "At Insaito, I helped build an end-to-end AI agent platform with multi-agent execution, document-grounded RAG, configurable human-in-the-loop intelligence, and real-time workflow status.",
       category: "AI Agent Platform",
       color: "blue",
       link: "https://automatan.ai"
@@ -66,7 +66,7 @@ window.RESUME_DATA = {
       title: "Healthcare workflow automation at Fold Health",
       description: "At Fold Health, I helped build a scalable visual automation system with 40+ triggers and 100+ filters that saved providers 75% of their time while supporting 1.7M+ active lives.",
       category: "Cloud / Healthcare",
-      color: "orange",
+      color: "healthcare",
       link: "https://fold.health"
     },
     {
@@ -165,14 +165,14 @@ window.RESUME_DATA = {
   achievements: [
     {
       value: "#6",
-      title: "National rank · ABU Robocon 2022",
+      title: "ABU Robocon 2022",
       detail: "Core Technical Member, PICT Robocon Team",
       certificateDetail: "Contributed to PICT's participation in DD-Robocon 2022, organized by IIT Delhi with Prasar Bharati.",
       certificateUrl: "assets/documents/certificates/Robocon_2022.pdf"
     },
     {
       value: "#13",
-      title: "National rank · ABU Robocon 2020",
+      title: "ABU Robocon 2020",
       detail: "Four years of competitive robotics, 2019–2023",
       certificateDetail: "Participated in the DD-Robocon 2020 Online Festival hosted by the Indian Institute of Technology Delhi.",
       certificateUrl: "assets/documents/certificates/Robocon_2020.pdf"
