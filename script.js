@@ -311,11 +311,8 @@ toolboxRoot.innerHTML = `
 const toolboxStage = toolboxRoot.querySelector("[data-toolbox-stage]");
 const toolboxNav = toolboxRoot.querySelector(".toolbox-network-nav");
 const toolboxTabs = [...toolboxRoot.querySelectorAll("[data-toolbox-tab]")];
-const toolboxSection = toolboxRoot.closest(".toolbox");
-const toolboxPin = toolboxRoot.closest(".toolbox-network-pin");
 let activeToolboxIndex = 0;
 const toolboxReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-toolboxSection.style.setProperty("--toolbox-scroll-depth", `${(data.toolbox.length - 1) * 38}vh`);
 
 const enableToolboxNodeDragging = () => {
   const canvas = toolboxStage.querySelector(".toolbox-network-canvas");
@@ -405,6 +402,7 @@ const renderToolboxNetwork = (index, { syncNav = true } = {}) => {
     `<line class="toolbox-edge toolbox-edge-hub" data-hub-node="${nodeIndex}" x1="50" y1="52" x2="${x.toFixed(2)}" y2="${y.toFixed(2)}" style="--edge-delay:-${(nodeIndex * .14).toFixed(2)}s" />`).join("");
 
   toolboxRoot.style.setProperty("--network-accent", accent);
+  toolboxRoot.style.setProperty("--toolbox-scroll-progress", ((index + 1) / data.toolbox.length).toFixed(4));
   toolboxTabs.forEach((tab, tabIndex) => {
     const selected = tabIndex === index;
     tab.setAttribute("aria-selected", String(selected));
@@ -440,30 +438,10 @@ const renderToolboxNetwork = (index, { syncNav = true } = {}) => {
   }
 };
 
-const getToolboxScrollMetrics = () => {
-  const stickyTop = window.innerWidth <= 560 ? 82 : window.innerWidth <= 900 ? 86 : 96;
-  const pinTop = window.scrollY + toolboxPin.getBoundingClientRect().top;
-  const pinBottom = pinTop + toolboxPin.offsetHeight;
-  const start = pinTop - stickyTop;
-  const end = Math.max(start + 1, pinBottom - toolboxRoot.offsetHeight - stickyTop);
-  return { start, end, stickyTop };
-};
-
-const scrollToToolboxIndex = (index) => {
-  if (window.innerWidth <= 560) return;
-  const { start, end } = getToolboxScrollMetrics();
-  const progress = (index + .5) / data.toolbox.length;
-  window.scrollTo({
-    top: start + (end - start) * progress,
-    behavior: toolboxReducedMotion.matches ? "auto" : "smooth"
-  });
-};
-
 toolboxTabs.forEach((tab) => {
   tab.addEventListener("click", () => {
     const nextIndex = Number(tab.dataset.toolboxTab);
     renderToolboxNetwork(nextIndex);
-    scrollToToolboxIndex(nextIndex);
   });
   tab.addEventListener("keydown", (event) => {
     if (!["ArrowDown", "ArrowUp", "ArrowLeft", "ArrowRight"].includes(event.key)) return;
@@ -472,7 +450,6 @@ toolboxTabs.forEach((tab) => {
     const nextIndex = (activeToolboxIndex + direction + data.toolbox.length) % data.toolbox.length;
     renderToolboxNetwork(nextIndex);
     toolboxTabs[nextIndex].focus();
-    scrollToToolboxIndex(nextIndex);
   });
 });
 
@@ -497,43 +474,7 @@ toolboxNav.addEventListener("scroll", () => {
   if (!toolboxNavScrollFrame) toolboxNavScrollFrame = requestAnimationFrame(updateToolboxFromHorizontalScroll);
 }, { passive: true });
 
-let toolboxScrollFrame = 0;
-const updateToolboxFromScroll = () => {
-  toolboxScrollFrame = 0;
-  if (window.innerWidth <= 560) {
-    toolboxRoot.classList.remove("is-pinned", "is-complete");
-    toolboxRoot.style.removeProperty("top");
-    toolboxRoot.style.removeProperty("left");
-    toolboxRoot.style.removeProperty("width");
-    return;
-  }
-  const { start, end, stickyTop } = getToolboxScrollMetrics();
-  const progress = Math.min(1, Math.max(0, (window.scrollY - start) / (end - start)));
-  const nextIndex = Math.min(data.toolbox.length - 1, Math.floor(progress * data.toolbox.length));
-  toolboxRoot.style.setProperty("--toolbox-scroll-progress", progress.toFixed(4));
-  const isPinned = window.scrollY >= start && window.scrollY <= end;
-  const isComplete = window.scrollY > end;
-  toolboxRoot.classList.toggle("is-pinned", isPinned);
-  toolboxRoot.classList.toggle("is-complete", isComplete);
-  if (isPinned) {
-    const pinBounds = toolboxPin.getBoundingClientRect();
-    toolboxRoot.style.top = `${stickyTop}px`;
-    toolboxRoot.style.left = `${pinBounds.left}px`;
-    toolboxRoot.style.width = `${pinBounds.width}px`;
-  } else {
-    toolboxRoot.style.removeProperty("top");
-    toolboxRoot.style.removeProperty("left");
-    toolboxRoot.style.removeProperty("width");
-  }
-  if (nextIndex !== activeToolboxIndex) renderToolboxNetwork(nextIndex);
-};
-const requestToolboxScrollUpdate = () => {
-  if (!toolboxScrollFrame) toolboxScrollFrame = requestAnimationFrame(updateToolboxFromScroll);
-};
-window.addEventListener("scroll", requestToolboxScrollUpdate, { passive: true });
-window.addEventListener("resize", requestToolboxScrollUpdate);
 renderToolboxNetwork(0);
-requestToolboxScrollUpdate();
 
 document.querySelector("[data-education]").innerHTML = data.education
   .map(({ degree, institutions, detail, period, location }) => `
