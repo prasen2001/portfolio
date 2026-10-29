@@ -31,6 +31,10 @@ window.RESUME_DATA = {
       company: "Insaito Inc. • Remote",
       companyUrl: "https://www.insaito.com/",
       description: "Founding engineer for <a href=\"https://automatan.ai/\" target=\"_blank\" rel=\"noreferrer\">Automatan.ai</a>, owning the full product stack. Built multi-agent orchestration, RAG pipelines, and a Docling-based ingestion layer for PDFs, Word documents, text files, CSVs, and Excel workbooks. Used Docling VLM for visual document understanding and structured information extraction, processing 1,000+ documents daily at 95%+ accuracy. Used OpenAI API inference alongside model deployment on Nebius AI Cloud with NVIDIA H200 GPUs.",
+      highlights: [
+        "Engineered an event-driven Google Sheets automation engine that processed 10,000+ updates through Pub/Sub, Firestore, and Cloud Storage with real-time status tracking.",
+        "Converted user-selected document insights into structured JSON and evaluated extraction against verified ground truth."
+      ],
       tags: [
         "React", "Python", "Flask", "Jinja", "HTML", "CSS", "JavaScript", "GitHub Actions",
         "AI agents", "RAG", "Docling", "Docling VLM", "OpenAI API", "Pinecone", "Secret Manager", "Cloud Run", "Compute Engine", "Pub/Sub",
@@ -44,6 +48,11 @@ window.RESUME_DATA = {
       company: "Fold Health Inc. • Pune, India",
       companyUrl: "https://fold.health",
       description: "Built healthcare workflow automation used by 200+ providers across 10+ organizations, supporting 1.7M+ active lives. Designed a provider-agnostic LLM inference layer that let users choose between OpenAI, Gemini, Claude, and other model APIs. Scaled concurrent workflow execution from 20 to 200 while reducing LLM inference costs by up to 80% and API calls by 3×.",
+      highlights: [
+        "Built an AWS Lambda PDF pipeline supporting 1,000+ concurrent requests, with database-backed caching to eliminate redundant processing.",
+        "Delivered an LLM-powered EHR synopsis with HIPAA-aware access controls, role-based authorization, and normalized structured output.",
+        "Shipped 50+ production features across healthcare products, from React performance and Redis caching to testing, releases, and production support."
+      ],
       tags: [
         "Python", "TypeScript", "React", "React Flow", "NestJS", "GraphQL", "Hasura", "PostgreSQL",
         "OpenAI / ChatGPT", "Google Gemini", "Anthropic Claude", "Prisma ORM", "SQLAlchemy ORM",
@@ -72,7 +81,7 @@ window.RESUME_DATA = {
     {
       number: "03",
       title: "Contactless pulse monitoring",
-      description: "A computer-vision system that extracts a pulse signal from camera recordings, filters noise, and uses Fourier analysis to estimate BPM without physical contact.",
+      description: "My B.E. final-year project: a computer-vision system that extracts a pulse signal from camera recordings, filters noise, and uses Fourier analysis to estimate BPM without physical contact.",
       category: "OpenCV / Signal Processing",
       color: "violet",
       link: "#"
@@ -104,7 +113,7 @@ window.RESUME_DATA = {
     {
       category: "Languages",
       description: "Core tools for application, systems, and data work.",
-      technologies: ["Python", "TypeScript", "JavaScript", "Java", "C++", "SQL"]
+      technologies: ["Python", "TypeScript", "JavaScript", "Java", "C", "C++", "SQL"]
     },
     {
       category: "Frontend & APIs",
@@ -119,7 +128,7 @@ window.RESUME_DATA = {
     {
       category: "Cloud, data & persistence",
       description: "Cloud platforms, containers, databases, vector search, and ORM-backed persistence.",
-      technologies: ["GCP", "AWS", "Docker", "PostgreSQL", "MongoDB", "Redis", "Pinecone", "Prisma ORM", "SQLAlchemy ORM"]
+      technologies: ["GCP", "AWS", "Docker", "PostgreSQL", "MySQL", "MongoDB", "Redis", "Pinecone", "Prisma ORM", "SQLAlchemy ORM"]
     },
     {
       category: "Google Cloud platform",
@@ -129,7 +138,7 @@ window.RESUME_DATA = {
     {
       category: "Web delivery & automation",
       description: "Design implementation, product delivery, server-rendered surfaces, and continuous integration.",
-      technologies: ["Figma", "Jira", "HTML", "CSS", "JavaScript", "Jinja", "GitHub Actions", "Flask"]
+      technologies: ["Figma", "Jira", "HTML", "CSS", "JavaScript", "Jinja", "Git", "GitHub", "GitLab", "GitHub Actions", "CI/CD", "Flask"]
     },
     {
       category: "AI infrastructure & inference",
@@ -139,7 +148,12 @@ window.RESUME_DATA = {
     {
       category: "AWS compute & orchestration",
       description: "Compute, eventing, serverless, configuration, and workflow services behind Fold Health.",
-      technologies: ["AWS SAM", "Amazon SQS", "EC2", "ECS", "AWS Lambda", "Step Functions", "State Machines", "EventBridge", "Parameter Store"]
+      technologies: ["AWS SAM", "Amazon SQS", "EC2", "ECS", "Amazon RDS", "Amazon S3", "API Gateway", "AWS Lambda", "Step Functions", "State Machines", "EventBridge", "Parameter Store"]
+    },
+    {
+      category: "Data science & computer vision",
+      description: "Scientific computing, classical machine learning, OCR, and image-based signal extraction.",
+      technologies: ["Scikit-learn", "NumPy", "Pandas", "OpenCV", "Tesseract", "EasyOCR"]
     }
   ],
   education: [
@@ -159,7 +173,8 @@ window.RESUME_DATA = {
       ],
       detail: "CGPA 8.76/10",
       period: "Aug 2019 — Jun 2023",
-      location: "Pune, India"
+      location: "Pune, India",
+      coursework: ["Database Systems", "Programming Systems Design", "Data Structures", "Object-Oriented Programming", "Computer Networks", "Cloud Computing", "Deep Learning"]
     }
   ],
   achievements: [
