@@ -484,8 +484,11 @@ h2 { font-size: clamp(43px, 5.2vw, 76px); line-height: 1.04; letter-spacing: -.0
   .education-row { display: block; }
   .education-meta { align-items: flex-start; margin-top: 15px; }
   .recruiter-actions { grid-template-columns: 1fr; }
-  .toolbox-network-pin { height: calc(735px + var(--toolbox-scroll-depth, 0px)); }
-  .toolbox-network { min-height: 735px; }
+  .toolbox-network-pin { height: auto; }
+  .toolbox-network { position: relative; top: auto; left: auto; width: 100%; min-height: 735px; }
+  .toolbox-network-progress { display: none; }
+  .toolbox-network-nav { padding-right: calc(50% - 75px); padding-left: calc(50% - 75px); scroll-padding-inline: calc(50% - 75px); scroll-snap-type: x mandatory; }
+  .toolbox-network-tab { scroll-snap-align: center; scroll-snap-stop: always; }
   .toolbox-network-tab { flex-basis: 150px; min-height: 48px; padding: 10px 7px; font-size: 10px; }
   .toolbox-network-stage { min-height: 650px; }
   .toolbox-network-heading { top: 20px; left: 18px; right: 18px; }
