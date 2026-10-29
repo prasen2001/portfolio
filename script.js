@@ -387,7 +387,7 @@ const enableToolboxNodeDragging = () => {
   });
 };
 
-const renderToolboxNetwork = (index) => {
+const renderToolboxNetwork = (index, { syncNav = true } = {}) => {
   activeToolboxIndex = index;
   const { category, description, technologies } = data.toolbox[index];
   const accent = toolboxAccents[index % toolboxAccents.length];
@@ -433,9 +433,11 @@ const renderToolboxNetwork = (index) => {
         </div>`).join("")}
     </div>`;
   enableToolboxNodeDragging();
-  const activeTab = toolboxTabs[index];
-  const targetLeft = activeTab.offsetLeft - (toolboxNav.clientWidth - activeTab.offsetWidth) / 2;
-  toolboxNav.scrollTo({ left: Math.max(0, targetLeft), behavior: toolboxReducedMotion.matches ? "auto" : "smooth" });
+  if (syncNav) {
+    const activeTab = toolboxTabs[index];
+    const targetLeft = activeTab.offsetLeft - (toolboxNav.clientWidth - activeTab.offsetWidth) / 2;
+    toolboxNav.scrollTo({ left: Math.max(0, targetLeft), behavior: toolboxReducedMotion.matches ? "auto" : "smooth" });
+  }
 };
 
 const getToolboxScrollMetrics = () => {
@@ -448,6 +450,7 @@ const getToolboxScrollMetrics = () => {
 };
 
 const scrollToToolboxIndex = (index) => {
+  if (window.innerWidth <= 560) return;
   const { start, end } = getToolboxScrollMetrics();
   const progress = (index + .5) / data.toolbox.length;
   window.scrollTo({
@@ -473,9 +476,37 @@ toolboxTabs.forEach((tab) => {
   });
 });
 
+let toolboxNavScrollFrame = 0;
+const updateToolboxFromHorizontalScroll = () => {
+  toolboxNavScrollFrame = 0;
+  if (window.innerWidth > 560) return;
+  const navCenter = toolboxNav.scrollLeft + toolboxNav.clientWidth / 2;
+  let closestIndex = 0;
+  let closestDistance = Number.POSITIVE_INFINITY;
+  toolboxTabs.forEach((tab, index) => {
+    const tabCenter = tab.offsetLeft + tab.offsetWidth / 2;
+    const distance = Math.abs(tabCenter - navCenter);
+    if (distance < closestDistance) {
+      closestDistance = distance;
+      closestIndex = index;
+    }
+  });
+  if (closestIndex !== activeToolboxIndex) renderToolboxNetwork(closestIndex, { syncNav: false });
+};
+toolboxNav.addEventListener("scroll", () => {
+  if (!toolboxNavScrollFrame) toolboxNavScrollFrame = requestAnimationFrame(updateToolboxFromHorizontalScroll);
+}, { passive: true });
+
 let toolboxScrollFrame = 0;
 const updateToolboxFromScroll = () => {
   toolboxScrollFrame = 0;
+  if (window.innerWidth <= 560) {
+    toolboxRoot.classList.remove("is-pinned", "is-complete");
+    toolboxRoot.style.removeProperty("top");
+    toolboxRoot.style.removeProperty("left");
+    toolboxRoot.style.removeProperty("width");
+    return;
+  }
   const { start, end, stickyTop } = getToolboxScrollMetrics();
   const progress = Math.min(1, Math.max(0, (window.scrollY - start) / (end - start)));
   const nextIndex = Math.min(data.toolbox.length - 1, Math.floor(progress * data.toolbox.length));
