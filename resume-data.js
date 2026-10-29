@@ -109,7 +109,7 @@ window.RESUME_DATA = {
     {
       category: "Frontend & APIs",
       description: "Interfaces and services designed as one product system.",
-      technologies: ["React", "React Flow", "Node.js", "NestJS", "Flask", "GraphQL", "Prisma ORM", "SQLAlchemy ORM"]
+      technologies: ["React", "React Flow", "Node.js", "NestJS", "Flask", "GraphQL"]
     },
     {
       category: "AI & document intelligence",
@@ -117,9 +117,9 @@ window.RESUME_DATA = {
       technologies: ["AI agents", "RAG", "Docling", "Docling VLM", "OpenAI API", "Google Gemini", "Anthropic Claude", "LangChain", "PyTorch", "TensorFlow", "OpenCV"]
     },
     {
-      category: "Cloud & data",
-      description: "Production infrastructure, persistence, and observability.",
-      technologies: ["GCP", "AWS", "Docker", "PostgreSQL", "MongoDB", "Redis", "Pinecone"]
+      category: "Cloud, data & persistence",
+      description: "Cloud platforms, containers, databases, vector search, and ORM-backed persistence.",
+      technologies: ["GCP", "AWS", "Docker", "PostgreSQL", "MongoDB", "Redis", "Pinecone", "Prisma ORM", "SQLAlchemy ORM"]
     },
     {
       category: "Google Cloud platform",
@@ -137,8 +137,8 @@ window.RESUME_DATA = {
       technologies: ["OpenAI API", "Google Gemini", "Anthropic Claude", "Nebius AI Cloud", "NVIDIA H200", "Pinecone", "Cloud Run", "Docker", "LLMs"]
     },
     {
-      category: "AWS serverless & orchestration",
-      description: "The services behind Fold Health's event-driven workflow platform.",
+      category: "AWS compute & orchestration",
+      description: "Compute, eventing, serverless, configuration, and workflow services behind Fold Health.",
       technologies: ["AWS SAM", "Amazon SQS", "EC2", "ECS", "AWS Lambda", "Step Functions", "State Machines", "EventBridge", "Parameter Store"]
     }
   ],

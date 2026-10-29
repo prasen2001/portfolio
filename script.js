@@ -294,19 +294,215 @@ document.querySelector("[data-skills]").innerHTML = data.skills
     </div>`)
   .join("");
 
-document.querySelector("[data-toolbox]").innerHTML = data.toolbox
-  .map(({ category, description, technologies }) => `
-    <article class="toolbox-group reveal">
-      <div class="toolbox-group-heading"><h3>${category}</h3><p>${description}</p></div>
-      <div class="toolbox-items">
-        ${technologies.map((technology) => `
-          <div class="toolbox-item">
-            ${techIcon(technology)}
-            <span>${technology}</span>
-          </div>`).join("")}
+const toolboxRoot = document.querySelector("[data-toolbox]");
+const toolboxAccents = ["#2146d9", "#7b4db3", "#078b78", "#d46a2c", "#4285f4", "#990000", "#685078", "#d46a2c"];
+
+toolboxRoot.innerHTML = `
+  <div class="toolbox-network-nav" role="tablist" aria-label="Technology categories">
+    <p>Explore the stack</p>
+    ${data.toolbox.map(({ category }, index) => `
+      <button class="toolbox-network-tab" type="button" role="tab" aria-selected="${index === 0}" data-toolbox-tab="${index}">
+        <span>${String(index + 1).padStart(2, "0")}</span>${category}
+      </button>`).join("")}
+    <div class="toolbox-network-progress" aria-hidden="true"><span></span></div>
+  </div>
+  <div class="toolbox-network-stage" role="tabpanel" aria-live="polite" data-toolbox-stage></div>`;
+
+const toolboxStage = toolboxRoot.querySelector("[data-toolbox-stage]");
+const toolboxNav = toolboxRoot.querySelector(".toolbox-network-nav");
+const toolboxTabs = [...toolboxRoot.querySelectorAll("[data-toolbox-tab]")];
+const toolboxSection = toolboxRoot.closest(".toolbox");
+const toolboxPin = toolboxRoot.closest(".toolbox-network-pin");
+let activeToolboxIndex = 0;
+const toolboxReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+toolboxSection.style.setProperty("--toolbox-scroll-depth", `${(data.toolbox.length - 1) * 38}vh`);
+
+const enableToolboxNodeDragging = () => {
+  const canvas = toolboxStage.querySelector(".toolbox-network-canvas");
+  const nodes = [...toolboxStage.querySelectorAll(".toolbox-network-node")];
+  if (!canvas || !nodes.length) return;
+
+  const positionOf = (node) => ({
+    x: Number.parseFloat(node.dataset.x),
+    y: Number.parseFloat(node.dataset.y)
+  });
+  const updateEdges = (nodeIndex) => {
+    const position = positionOf(nodes[nodeIndex]);
+    const hubEdge = canvas.querySelector(`[data-hub-node="${nodeIndex}"]`);
+    if (hubEdge) {
+      hubEdge.setAttribute("x2", position.x.toFixed(2));
+      hubEdge.setAttribute("y2", position.y.toFixed(2));
+    }
+  };
+  const moveNode = (node, nodeIndex, nextX, nextY) => {
+    const bounds = canvas.getBoundingClientRect();
+    const minX = (node.offsetWidth / 2 / bounds.width) * 100;
+    const maxX = 100 - minX;
+    const minY = (node.offsetHeight / 2 / bounds.height) * 100;
+    const maxY = 100 - minY;
+    const x = Math.min(maxX, Math.max(minX, nextX));
+    const y = Math.min(maxY, Math.max(minY, nextY));
+    node.dataset.x = x.toFixed(2);
+    node.dataset.y = y.toFixed(2);
+    node.style.left = `${x}%`;
+    node.style.top = `${y}%`;
+    updateEdges(nodeIndex);
+  };
+
+  nodes.forEach((node, nodeIndex) => {
+    let dragging = false;
+    const moveFromPointer = (event) => {
+      if (!dragging) return;
+      const bounds = canvas.getBoundingClientRect();
+      moveNode(node, nodeIndex,
+        ((event.clientX - bounds.left) / bounds.width) * 100,
+        ((event.clientY - bounds.top) / bounds.height) * 100);
+    };
+    const finishDrag = (event) => {
+      if (!dragging) return;
+      dragging = false;
+      node.classList.remove("is-dragging");
+      if (node.hasPointerCapture(event.pointerId)) node.releasePointerCapture(event.pointerId);
+    };
+    node.addEventListener("pointerdown", (event) => {
+      if (event.pointerType === "mouse" && event.button !== 0) return;
+      event.preventDefault();
+      dragging = true;
+      node.classList.add("is-dragging");
+      node.setPointerCapture(event.pointerId);
+      moveFromPointer(event);
+    });
+    node.addEventListener("pointermove", moveFromPointer);
+    node.addEventListener("pointerup", finishDrag);
+    node.addEventListener("pointercancel", finishDrag);
+    node.addEventListener("keydown", (event) => {
+      if (!["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"].includes(event.key)) return;
+      event.preventDefault();
+      const position = positionOf(node);
+      const step = event.shiftKey ? 4 : 1.5;
+      const deltaX = event.key === "ArrowLeft" ? -step : event.key === "ArrowRight" ? step : 0;
+      const deltaY = event.key === "ArrowUp" ? -step : event.key === "ArrowDown" ? step : 0;
+      moveNode(node, nodeIndex, position.x + deltaX, position.y + deltaY);
+    });
+  });
+};
+
+const renderToolboxNetwork = (index) => {
+  activeToolboxIndex = index;
+  const { category, description, technologies } = data.toolbox[index];
+  const accent = toolboxAccents[index % toolboxAccents.length];
+  const count = technologies.length;
+  const radiusX = count > 9 ? 43 : count > 6 ? 40 : 37;
+  const radiusY = count > 9 ? 40 : count > 6 ? 37 : 34;
+  const positions = technologies.map((_, nodeIndex) => {
+    const angle = -Math.PI / 2 + (Math.PI * 2 * nodeIndex) / count;
+    return {
+      x: 50 + Math.cos(angle) * radiusX,
+      y: 52 + Math.sin(angle) * radiusY
+    };
+  });
+  const hubEdges = positions.map(({ x, y }, nodeIndex) =>
+    `<line class="toolbox-edge toolbox-edge-hub" data-hub-node="${nodeIndex}" x1="50" y1="52" x2="${x.toFixed(2)}" y2="${y.toFixed(2)}" style="--edge-delay:-${(nodeIndex * .14).toFixed(2)}s" />`).join("");
+
+  toolboxRoot.style.setProperty("--network-accent", accent);
+  toolboxTabs.forEach((tab, tabIndex) => {
+    const selected = tabIndex === index;
+    tab.setAttribute("aria-selected", String(selected));
+    tab.tabIndex = selected ? 0 : -1;
+  });
+  toolboxStage.innerHTML = `
+    <div class="toolbox-network-heading">
+      <p>${String(index + 1).padStart(2, "0")} / ${String(data.toolbox.length).padStart(2, "0")}</p>
+      <h3>${category}</h3>
+      <span>${description}</span>
+    </div>
+    <div class="toolbox-network-canvas">
+      <svg class="toolbox-network-edges" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+        ${hubEdges}
+      </svg>
+      <div class="toolbox-network-hub">
+        <span>${String(count).padStart(2, "0")}</span>
+        <strong>Technologies</strong>
+        <small>in this category</small>
+        <i aria-hidden="true"></i>
       </div>
-    </article>`)
-  .join("");
+      ${technologies.map((technology, nodeIndex) => `
+        <div class="toolbox-network-node" tabindex="0" aria-label="${technology} node. Drag it or use the arrow keys to reposition it." data-node-index="${nodeIndex}" data-x="${positions[nodeIndex].x.toFixed(2)}" data-y="${positions[nodeIndex].y.toFixed(2)}" style="left:${positions[nodeIndex].x.toFixed(2)}%;top:${positions[nodeIndex].y.toFixed(2)}%;--node-delay:-${(nodeIndex * .27).toFixed(2)}s">
+          ${techIcon(technology)}
+          <span>${technology}</span>
+        </div>`).join("")}
+    </div>`;
+  enableToolboxNodeDragging();
+  const activeTab = toolboxTabs[index];
+  const targetLeft = activeTab.offsetLeft - (toolboxNav.clientWidth - activeTab.offsetWidth) / 2;
+  toolboxNav.scrollTo({ left: Math.max(0, targetLeft), behavior: toolboxReducedMotion.matches ? "auto" : "smooth" });
+};
+
+const getToolboxScrollMetrics = () => {
+  const stickyTop = window.innerWidth <= 560 ? 82 : window.innerWidth <= 900 ? 86 : 96;
+  const pinTop = window.scrollY + toolboxPin.getBoundingClientRect().top;
+  const pinBottom = pinTop + toolboxPin.offsetHeight;
+  const start = pinTop - stickyTop;
+  const end = Math.max(start + 1, pinBottom - toolboxRoot.offsetHeight - stickyTop);
+  return { start, end, stickyTop };
+};
+
+const scrollToToolboxIndex = (index) => {
+  const { start, end } = getToolboxScrollMetrics();
+  const progress = (index + .5) / data.toolbox.length;
+  window.scrollTo({
+    top: start + (end - start) * progress,
+    behavior: toolboxReducedMotion.matches ? "auto" : "smooth"
+  });
+};
+
+toolboxTabs.forEach((tab) => {
+  tab.addEventListener("click", () => {
+    const nextIndex = Number(tab.dataset.toolboxTab);
+    renderToolboxNetwork(nextIndex);
+    scrollToToolboxIndex(nextIndex);
+  });
+  tab.addEventListener("keydown", (event) => {
+    if (!["ArrowDown", "ArrowUp", "ArrowLeft", "ArrowRight"].includes(event.key)) return;
+    event.preventDefault();
+    const direction = event.key === "ArrowDown" || event.key === "ArrowRight" ? 1 : -1;
+    const nextIndex = (activeToolboxIndex + direction + data.toolbox.length) % data.toolbox.length;
+    renderToolboxNetwork(nextIndex);
+    toolboxTabs[nextIndex].focus();
+    scrollToToolboxIndex(nextIndex);
+  });
+});
+
+let toolboxScrollFrame = 0;
+const updateToolboxFromScroll = () => {
+  toolboxScrollFrame = 0;
+  const { start, end, stickyTop } = getToolboxScrollMetrics();
+  const progress = Math.min(1, Math.max(0, (window.scrollY - start) / (end - start)));
+  const nextIndex = Math.min(data.toolbox.length - 1, Math.floor(progress * data.toolbox.length));
+  toolboxRoot.style.setProperty("--toolbox-scroll-progress", progress.toFixed(4));
+  const isPinned = window.scrollY >= start && window.scrollY <= end;
+  const isComplete = window.scrollY > end;
+  toolboxRoot.classList.toggle("is-pinned", isPinned);
+  toolboxRoot.classList.toggle("is-complete", isComplete);
+  if (isPinned) {
+    const pinBounds = toolboxPin.getBoundingClientRect();
+    toolboxRoot.style.top = `${stickyTop}px`;
+    toolboxRoot.style.left = `${pinBounds.left}px`;
+    toolboxRoot.style.width = `${pinBounds.width}px`;
+  } else {
+    toolboxRoot.style.removeProperty("top");
+    toolboxRoot.style.removeProperty("left");
+    toolboxRoot.style.removeProperty("width");
+  }
+  if (nextIndex !== activeToolboxIndex) renderToolboxNetwork(nextIndex);
+};
+const requestToolboxScrollUpdate = () => {
+  if (!toolboxScrollFrame) toolboxScrollFrame = requestAnimationFrame(updateToolboxFromScroll);
+};
+window.addEventListener("scroll", requestToolboxScrollUpdate, { passive: true });
+window.addEventListener("resize", requestToolboxScrollUpdate);
+renderToolboxNetwork(0);
+requestToolboxScrollUpdate();
 
 document.querySelector("[data-education]").innerHTML = data.education
   .map(({ degree, institutions, detail, period, location }) => `
