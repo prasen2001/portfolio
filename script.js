@@ -56,7 +56,17 @@ const techAssets = {
   "step functions": "assets/icons/tech/aws-step-functions.svg",
   "state machines": "assets/icons/tech/aws-step-functions.svg",
   "eventbridge": "assets/icons/tech/amazon-eventbridge.svg",
-  "parameter store": "assets/icons/tech/parameter-store.svg"
+  "parameter store": "assets/icons/tech/parameter-store.svg",
+  "scikit-learn": "assets/icons/tech/scikit-learn.svg",
+  "numpy": "assets/icons/tech/numpy.svg",
+  "pandas": "assets/icons/tech/pandas.svg",
+  "mysql": "assets/icons/tech/mysql.svg",
+  "git": "assets/icons/tech/git.svg",
+  "github": "assets/icons/tech/github.svg",
+  "gitlab": "assets/icons/tech/gitlab.svg",
+  "amazon rds": "assets/icons/tech/amazon-rds.svg",
+  "amazon s3": "assets/icons/tech/amazon-s3.svg",
+  "api gateway": "assets/icons/tech/amazon-api-gateway.svg"
 };
 
 const techAliases = {
@@ -98,7 +108,10 @@ const techIcons = {
   "sql": `<svg viewBox="0 0 24 24" aria-hidden="true"><ellipse cx="12" cy="5.2" rx="7.5" ry="3" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M4.5 5.2v6.9c0 1.7 3.4 3 7.5 3s7.5-1.3 7.5-3V5.2M4.5 12v6.8c0 1.7 3.4 3 7.5 3s7.5-1.3 7.5-3V12" fill="none" stroke="currentColor" stroke-width="1.7"/></svg>`,
   "c++": `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 2.5 8.3 4.8v9.4L12 21.5l-8.3-4.8V7.3Z" fill="currentColor"/><path d="M11.8 8.2a4 4 0 1 0 0 7.6M13.6 10.5v4M11.6 12.5h4M18.4 10.5v4M16.4 12.5h4" fill="none" stroke="var(--icon-cut, white)" stroke-width="1.4" stroke-linecap="round"/></svg>`,
   "ci/cd": `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.5 7.5a6.4 6.4 0 0 1 9.6-.7L19 8.7M16.5 16.5a6.4 6.4 0 0 1-9.6.7L5 15.3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M19 4.5v4.2h-4.2M5 19.5v-4.2h4.2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="m10 9 5 3-5 3Z" fill="currentColor"/></svg>`,
-  "opencv": `<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="6.5" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="7" cy="15.5" r="4" fill="none" stroke="currentColor" stroke-width="2" opacity=".7"/><circle cx="17" cy="15.5" r="4" fill="none" stroke="currentColor" stroke-width="2" opacity=".4"/></svg>`
+  "opencv": `<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="6.5" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="7" cy="15.5" r="4" fill="none" stroke="currentColor" stroke-width="2" opacity=".7"/><circle cx="17" cy="15.5" r="4" fill="none" stroke="currentColor" stroke-width="2" opacity=".4"/></svg>`,
+  "c": `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 2.5 8.2 4.7v9.6L12 21.5l-8.2-4.7V7.2Z" fill="currentColor"/><path d="M15.8 9.2A4.2 4.2 0 1 0 15.8 15" fill="none" stroke="var(--icon-cut, white)" stroke-width="2" stroke-linecap="round"/></svg>`,
+  "tesseract": `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3H3v5M19 3h2v5M5 21H3v-5M19 21h2v-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M7 7h10M12 7v10M9 17h6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>`,
+  "easyocr": `<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="3" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M8 8h8M8 12h5M8 16h7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="m15.5 12.5 1.3 1.3 2.2-2.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>`
 };
 
 const techIcon = (name) => {
@@ -147,13 +160,19 @@ document.querySelector("[data-metrics]").innerHTML = data.metrics
   .join("");
 
 document.querySelector("[data-experience]").innerHTML = data.experience
-  .map(({ period, role, company, companyUrl, description, tags }) => `
+  .map(({ period, role, company, companyUrl, description, highlights = [], tags }) => `
     <article class="timeline-row reveal">
-      <div class="timeline-period">${period}</div>
-      <div class="timeline-role"><h3>${role}</h3><p>${companyUrl ? `<a href="${companyUrl}" target="_blank" rel="noreferrer">${company} <span aria-hidden="true">↗</span></a>` : company}</p></div>
+      <div class="timeline-context">
+        <div class="timeline-period">${period}</div>
+        <div class="timeline-role"><h3>${role}</h3><p>${companyUrl ? `<a href="${companyUrl}" target="_blank" rel="noreferrer">${company} <span aria-hidden="true">↗</span></a>` : company}</p></div>
+        <div class="timeline-stack">
+          <div class="timeline-stack-heading"><span>Technical stack</span><strong>${String(tags.length).padStart(2, "0")} tools</strong></div>
+          <div class="tag-list">${tags.map((tag) => techBadge(tag, "tag")).join("")}</div>
+        </div>
+      </div>
       <div class="timeline-detail">
         <p>${description}</p>
-        <div class="tag-list">${tags.map((tag) => techBadge(tag, "tag")).join("")}</div>
+        ${highlights.length ? `<ul class="timeline-highlights">${highlights.map((highlight) => `<li>${highlight}</li>`).join("")}</ul>` : ""}
       </div>
     </article>`)
   .join("");
@@ -477,7 +496,7 @@ toolboxNav.addEventListener("scroll", () => {
 renderToolboxNetwork(0);
 
 document.querySelector("[data-education]").innerHTML = data.education
-  .map(({ degree, institutions, detail, period, location }) => `
+  .map(({ degree, institutions, detail, period, location, coursework = [] }) => `
     <article class="education-row">
       <div>
         <h3>${degree}</h3>
@@ -485,6 +504,16 @@ document.querySelector("[data-education]").innerHTML = data.education
           ${institutions.map(({ name, url }) => `<a href="${url}" target="_blank" rel="noreferrer">${name} <span aria-hidden="true">↗</span></a>`).join('<span class="education-separator" aria-hidden="true">·</span>')}
           ${detail ? `<span class="education-separator" aria-hidden="true">·</span><span>${detail}</span>` : ""}
         </p>
+        ${coursework.length ? `
+          <div class="education-coursework">
+            <div class="education-coursework-heading">
+              <span aria-hidden="true">✦</span>
+              <strong>Relevant coursework</strong>
+            </div>
+            <div class="education-course-list">
+              ${coursework.map((course) => `<span>${course}</span>`).join("")}
+            </div>
+          </div>` : ""}
       </div>
       <div class="education-meta"><span>${period}</span><span>${location}</span></div>
     </article>`)
