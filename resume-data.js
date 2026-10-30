@@ -2,6 +2,7 @@
 // The website renders all resume-specific content from this one object.
 window.RESUME_DATA = {
   name: "Prasenjeet Tambe",
+  heroName: "Prasenjeet S. Tambe",
   initials: "PT",
   title: "Software Engineer · AI Systems & Full-Stack Products",
   location: "Los Angeles, CA",
@@ -89,24 +90,24 @@ window.RESUME_DATA = {
   ],
   skills: [
     {
-      name: "AI & machine learning",
-      detail: "Production intelligence from orchestration through evaluation.",
-      technologies: ["AI agents", "RAG", "Docling", "Docling VLM", "OpenAI API", "Google Gemini", "Anthropic Claude", "LangChain", "PyTorch", "TensorFlow", "OpenCV"]
+      name: "Design production AI systems",
+      detail: "Turn ambiguous AI ideas into grounded, measurable products with orchestration, retrieval, document intelligence, and human oversight.",
+      outcomes: ["Grounded responses", "Human-in-the-loop", "Evaluation-ready"]
     },
     {
-      name: "Full-stack engineering",
-      detail: "Design-faithful interfaces backed by dependable services and APIs.",
-      technologies: ["Figma", "React", "TypeScript", "Node.js", "Flask", "GraphQL", "Prisma ORM", "SQLAlchemy ORM"]
+      name: "Scale workflow automation",
+      detail: "Engineer event-driven systems that handle real production load while improving throughput, reliability, and operating cost.",
+      outcomes: ["10× throughput", "Cost-efficient inference", "Reliable orchestration"]
     },
     {
-      name: "Cloud & distributed systems",
-      detail: "Event-driven, serverless systems built to scale in production.",
-      technologies: ["GCP", "AWS", "Nebius AI Cloud", "NVIDIA H200", "Docker", "CI/CD"]
+      name: "Ship complete products",
+      detail: "Own the path from design-faithful interfaces to APIs, data models, cloud infrastructure, testing, and production releases.",
+      outcomes: ["Product-minded UX", "Dependable services", "End-to-end ownership"]
     },
     {
-      name: "Data & persistence",
-      detail: "Purpose-fit storage, caching, and reliable data access.",
-      technologies: ["PostgreSQL", "MongoDB", "Redis", "Firestore"]
+      name: "Build healthcare-ready software",
+      detail: "Create provider workflows and AI-assisted clinical experiences with privacy, authorization, and operational realities built in.",
+      outcomes: ["HIPAA-aware patterns", "Role-based access", "Provider-centered workflows"]
     }
   ],
   toolbox: [
@@ -164,7 +165,8 @@ window.RESUME_DATA = {
         { name: "Viterbi School of Engineering", url: "https://viterbischool.usc.edu/" }
       ],
       period: "Aug 2026 — Dec 2028",
-      location: "Los Angeles, CA"
+      location: "Los Angeles, CA",
+      coursework: ["Database Systems", "Fundamentals of Programming Systems"]
     },
     {
       degree: "B.E. in Electronics & Telecommunication Engineering",
@@ -174,7 +176,54 @@ window.RESUME_DATA = {
       detail: "CGPA 8.76/10",
       period: "Aug 2019 — Jun 2023",
       location: "Pune, India",
-      coursework: ["Database Systems", "Programming Systems Design", "Data Structures", "Object-Oriented Programming", "Computer Networks", "Cloud Computing", "Deep Learning"]
+      coursework: [
+        "Programming & Problem Solving",
+        "Data Structures",
+        "Object-Oriented Programming",
+        "Advanced Java Programming",
+        "JavaScript",
+        "Android Development",
+        "Database Management",
+        "Computer Networks",
+        "Cloud Computing",
+        "Deep Learning"
+      ],
+      curriculum: [
+        {
+          label: "Freshman Year · First Year Engineering",
+          subjects: [
+            "Systems in Mechanical Engineering", "Basic Electronics Engineering", "Engineering Mathematics I",
+            "Engineering Chemistry", "Programming & Problem Solving",
+            "Engineering Mechanics", "Engineering Graphics", "Basic Electrical Engineering", "Engineering Physics",
+            "Engineering Mathematics II"
+          ]
+        },
+        {
+          label: "Sophomore Year · Second Year Engineering",
+          subjects: [
+            "Electronic Circuits", "Digital Circuits", "Electrical Circuits", "Data Structures",
+            "Engineering Mathematics III",
+            "Signals & Systems", "Control Systems", "Principles of Communication Systems",
+            "Object-Oriented Programming"
+          ]
+        },
+        {
+          label: "Junior Year · Third Year Engineering",
+          subjects: [
+            "Digital Communication", "Electromagnetic Field Theory", "Database Management", "Microcontrollers",
+            "Computer Networks", "Cellular Networks", "Power Devices & Circuits", "Advanced Java Programming",
+            "Internship", "Mini Project"
+          ]
+        },
+        {
+          label: "Senior Year · Final Year Engineering",
+          subjects: [
+            "Radiation & Microwave Theory", "VLSI Design & Technology", "Cloud Computing", "JavaScript",
+            "Deep Learning", "Project Stage I", "Fiber Optic Communication", "Android Development",
+            "Project Stage II"
+          ]
+        }
+      ]
     }
   ],
   achievements: [

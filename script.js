@@ -133,6 +133,36 @@ const techBadge = (name, className = "tech-badge") =>
 
 setText("[data-person-name]", data.name);
 setText("[data-initials]", data.initials);
+const heroName = document.querySelector("[data-hero-name]");
+if (heroName) {
+  let letterIndex = 0;
+  heroName.setAttribute("aria-label", data.heroName);
+  const fullName = data.heroName.split(" ").map((word, wordIndex) => {
+    const letters = [...word].map((letter) => {
+      const index = letterIndex++;
+      const tilt = index % 2 === 0 ? "-16deg" : "16deg";
+      return `<span class="hero-name-letter" style="--letter-index:${index};--letter-tilt:${tilt}">${letter}</span>`;
+    }).join("");
+    return `<span class="hero-name-word${wordIndex === 0 ? " hero-name-first" : ""}" aria-hidden="true">${letters}</span>`;
+  }).join("");
+  heroName.innerHTML = `
+    <span class="hero-name-final">${fullName}</span>
+    <span class="name-push-scene" aria-hidden="true">
+      <span class="name-push-rig">
+        <svg class="name-push-character" viewBox="0 0 54 72">
+          <circle class="push-head" cx="22" cy="13" r="9" />
+          <path class="push-body" d="M22 22 28 43" />
+          <path class="push-arm-a" d="M25 28 43 24" />
+          <path class="push-arm-b" d="M27 33 44 31" />
+          <path class="push-leg-a" d="M28 43 15 63" />
+          <path class="push-leg-b" d="M28 43 41 62" />
+          <path class="push-cap" d="M13 11q9-11 18 0M13 11h21" />
+        </svg>
+        <span class="name-push-block"><span>${data.heroName}</span></span>
+      </span>
+      <span class="name-push-ground"></span>
+    </span>`;
+}
 setText("[data-availability-degree]", data.availability.degree);
 setText("[data-availability-school]", data.availability.school);
 setText("[data-availability-status]", data.availability.status);
@@ -303,12 +333,16 @@ document.querySelector("[data-projects]").innerHTML = data.projects
   .join("");
 
 document.querySelector("[data-skills]").innerHTML = data.skills
-  .map(({ name, detail, technologies }, index) => `
+  .map(({ name, detail, outcomes }, index) => `
     <div class="skill">
-      <span class="skill-number">0${index + 1}</span>
-      <div>
-        <h3>${name}</h3><p>${detail}</p>
-        <div class="tech-cloud">${technologies.map((tech) => techBadge(tech)).join("")}</div>
+      <div class="skill-topline">
+        <span class="skill-number">0${index + 1}</span>
+        <span class="skill-delivery">Outcome</span>
+      </div>
+      <div class="skill-content">
+        <h3>${name}</h3>
+        <p>${detail}</p>
+        <ul class="skill-outcomes">${outcomes.map((outcome) => `<li>${outcome}</li>`).join("")}</ul>
       </div>
     </div>`)
   .join("");
@@ -496,7 +530,7 @@ toolboxNav.addEventListener("scroll", () => {
 renderToolboxNetwork(0);
 
 document.querySelector("[data-education]").innerHTML = data.education
-  .map(({ degree, institutions, detail, period, location, coursework = [] }) => `
+  .map(({ degree, institutions, detail, period, location, coursework = [], curriculum = [] }) => `
     <article class="education-row">
       <div>
         <h3>${degree}</h3>
@@ -504,6 +538,7 @@ document.querySelector("[data-education]").innerHTML = data.education
           ${institutions.map(({ name, url }) => `<a href="${url}" target="_blank" rel="noreferrer">${name} <span aria-hidden="true">↗</span></a>`).join('<span class="education-separator" aria-hidden="true">·</span>')}
           ${detail ? `<span class="education-separator" aria-hidden="true">·</span><span>${detail}</span>` : ""}
         </p>
+        <div class="education-meta education-meta-mobile"><span>${period}</span><span>${location}</span></div>
         ${coursework.length ? `
           <div class="education-coursework">
             <div class="education-coursework-heading">
@@ -514,8 +549,22 @@ document.querySelector("[data-education]").innerHTML = data.education
               ${coursework.map((course) => `<span>${course}</span>`).join("")}
             </div>
           </div>` : ""}
+        ${curriculum.length ? `
+          <details class="education-curriculum">
+            <summary>
+              <span>Complete SPPU curriculum</span>
+              <strong>${curriculum.reduce((total, group) => total + group.subjects.length, 0)} unique subjects</strong>
+            </summary>
+            <div class="curriculum-groups">
+              ${curriculum.map(({ label, subjects }) => `
+                <section class="curriculum-group">
+                  <h4>${label}</h4>
+                  <div class="curriculum-subjects">${subjects.map((subject) => `<span>${subject}</span>`).join("")}</div>
+                </section>`).join("")}
+            </div>
+          </details>` : ""}
       </div>
-      <div class="education-meta"><span>${period}</span><span>${location}</span></div>
+      <div class="education-meta education-meta-desktop"><span>${period}</span><span>${location}</span></div>
     </article>`)
   .join("");
 
