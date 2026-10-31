@@ -4,7 +4,18 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Prasenjeet's professional portfolio." />
-    <meta name="theme-color" content="#990000" />
+    <meta name="theme-color" content="#990000" data-theme-color />
+    <script>
+      (() => {
+        try {
+          const savedTheme = localStorage.getItem("portfolio-theme");
+          const systemTheme = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+          document.documentElement.dataset.theme = savedTheme || systemTheme;
+        } catch {
+          document.documentElement.dataset.theme = "light";
+        }
+      })();
+    </script>
     <title>Prasenjeet — Portfolio</title>
     <link rel="icon" href="assets/icons/favicon.svg?v=20261028-4" type="image/svg+xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -13,7 +24,7 @@
       href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles.css?v=20261029-48" />
+    <link rel="stylesheet" href="styles.css?v=20261030-50" />
   </head>
   <body>
     <div class="noise" aria-hidden="true"></div>
@@ -24,6 +35,15 @@
         <img class="brand-mark" src="assets/icons/favicon.svg?v=20261028-4" alt="" aria-hidden="true" />
         <span data-person-name>Prasenjeet</span>
       </a>
+      <button class="theme-toggle" type="button" aria-label="Switch to dark mode" aria-pressed="false" data-theme-toggle>
+        <svg class="theme-icon theme-icon-moon" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M20 15.1A8.2 8.2 0 0 1 8.9 4a8.3 8.3 0 1 0 11.1 11.1Z" />
+        </svg>
+        <svg class="theme-icon theme-icon-sun" viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="12" cy="12" r="3.5" />
+          <path d="M12 2v2.2M12 19.8V22M4.9 4.9l1.6 1.6M17.5 17.5l1.6 1.6M2 12h2.2M19.8 12H22M4.9 19.1l1.6-1.6M17.5 6.5l1.6-1.6" />
+        </svg>
+      </button>
       <button class="menu-button" type="button" aria-label="Toggle navigation" aria-expanded="false">
         <span></span><span></span>
       </button>
@@ -219,6 +239,6 @@
     </main>
 
     <script src="resume-data.js?v=20261029-17"></script>
-    <script src="script.js?v=20261029-33"></script>
+    <script src="script.js?v=20261030-34"></script>
   </body>
 </html>
