@@ -1,5 +1,26 @@
 const data = window.RESUME_DATA;
 
+const themeToggle = document.querySelector("[data-theme-toggle]");
+const themeColor = document.querySelector("[data-theme-color]");
+
+const applyTheme = (theme, { persist = true } = {}) => {
+  const nextTheme = theme === "dark" ? "dark" : "light";
+  document.documentElement.dataset.theme = nextTheme;
+  const isDark = nextTheme === "dark";
+  themeToggle.setAttribute("aria-pressed", String(isDark));
+  themeToggle.setAttribute("aria-label", `Switch to ${isDark ? "light" : "dark"} mode`);
+  themeToggle.title = `Switch to ${isDark ? "light" : "dark"} mode`;
+  themeColor.content = isDark ? "#101214" : "#990000";
+  if (persist) {
+    try { localStorage.setItem("portfolio-theme", nextTheme); } catch { /* Storage may be unavailable in local previews. */ }
+  }
+};
+
+applyTheme(document.documentElement.dataset.theme, { persist: false });
+themeToggle.addEventListener("click", () => {
+  applyTheme(document.documentElement.dataset.theme === "dark" ? "light" : "dark");
+});
+
 const setText = (selector, value) => {
   document.querySelectorAll(selector).forEach((element) => { element.textContent = value; });
 };
