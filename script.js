@@ -371,16 +371,26 @@ document.querySelector("[data-skills]").innerHTML = data.skills
 const toolboxRoot = document.querySelector("[data-toolbox]");
 const toolboxAccents = ["#2146d9", "#7b4db3", "#078b78", "#d46a2c", "#4285f4", "#990000", "#685078", "#d46a2c"];
 
-toolboxRoot.innerHTML = `
-  <div class="toolbox-network-nav" role="tablist" aria-label="Technology categories">
-    <p>Explore the stack</p>
-    ${data.toolbox.map(({ category }, index) => `
-      <button class="toolbox-network-tab" type="button" role="tab" aria-selected="${index === 0}" data-toolbox-tab="${index}">
-        <span>${String(index + 1).padStart(2, "0")}</span>${category}
-      </button>`).join("")}
-    <div class="toolbox-network-progress" aria-hidden="true"><span></span></div>
-  </div>
-  <div class="toolbox-network-stage" role="tabpanel" aria-live="polite" data-toolbox-stage></div>`;
+toolboxRoot.innerHTML = data.toolbox.map(({ category, description, technologies }, index) => `
+  <article class="toolbox-category-card" style="--category-accent:${toolboxAccents[index % toolboxAccents.length]}">
+    <div class="toolbox-category-topline">
+      <span>${String(index + 1).padStart(2, "0")}</span>
+      <strong>${String(technologies.length).padStart(2, "0")} tools</strong>
+    </div>
+    <div class="toolbox-category-copy">
+      <h3>${category}</h3>
+      <p>${description}</p>
+    </div>
+    <div class="toolbox-category-tools" aria-label="${category} technologies">
+      ${technologies.map((technology) => `
+        <span class="landscape-tech">
+          ${techIcon(technology)}
+          <span>${technology}</span>
+        </span>`).join("")}
+    </div>
+  </article>`).join("");
+
+if (toolboxRoot.matches("[data-toolbox-network]")) {
 
 const toolboxStage = toolboxRoot.querySelector("[data-toolbox-stage]");
 const toolboxNav = toolboxRoot.querySelector(".toolbox-network-nav");
@@ -549,6 +559,7 @@ toolboxNav.addEventListener("scroll", () => {
 }, { passive: true });
 
 renderToolboxNetwork(0);
+}
 
 document.querySelector("[data-education]").innerHTML = data.education
   .map(({ degree, institutions, detail, period, location, coursework = [], curriculum = [] }) => `
@@ -858,3 +869,223 @@ const initHeroSpatialBackground = () => {
 };
 
 initHeroSpatialBackground();
+
+const initLivingMesh = () => {
+  const canvas = document.querySelector("[data-living-mesh]");
+  const context = canvas?.getContext("2d");
+  if (!canvas || !context) return;
+
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const palette = [
+    [33, 70, 217],   // AI blue
+    [7, 139, 120],   // healthcare teal
+    [153, 0, 0],     // USC Cardinal
+    [255, 204, 0]    // USC Gold
+  ];
+  let width = 0;
+  let height = 0;
+  let nodes = [];
+  let animationFrame = 0;
+  let breakpoint = "";
+  const pointer = { x: -1000, y: -1000 };
+
+  const seededRandom = (seed) => {
+    let value = seed >>> 0;
+    return () => {
+      value = (value * 1664525 + 1013904223) >>> 0;
+      return value / 4294967296;
+    };
+  };
+
+  const createNodes = () => {
+    const compact = width < 700;
+    const random = seededRandom(compact ? 4301 : 9107);
+    const count = compact ? 31 : 54;
+    nodes = Array.from({ length: count }, (_, index) => ({
+      x: random() * width,
+      y: random() * height,
+      radius: 1.25 + random() * 2.25,
+      driftX: 8 + random() * 18,
+      driftY: 7 + random() * 16,
+      speed: .00012 + random() * .00016,
+      phase: random() * Math.PI * 2,
+      color: palette[index % palette.length],
+      vital: index % 13 === 4
+    }));
+  };
+
+  const resize = () => {
+    const nextWidth = Math.max(1, Math.round(window.innerWidth));
+    const nextHeight = Math.max(1, Math.round(window.innerHeight));
+    const nextBreakpoint = nextWidth < 700 ? "compact" : "wide";
+    const sizeChanged = nextWidth !== width || nextHeight !== height;
+    if (!sizeChanged) return;
+    width = nextWidth;
+    height = nextHeight;
+    const pixelRatio = Math.min(window.devicePixelRatio || 1, 1.5);
+    canvas.width = Math.round(width * pixelRatio);
+    canvas.height = Math.round(height * pixelRatio);
+    canvas.style.width = `${width}px`;
+    canvas.style.height = `${height}px`;
+    context.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
+    if (!nodes.length || breakpoint !== nextBreakpoint) {
+      breakpoint = nextBreakpoint;
+      createNodes();
+    } else {
+      createNodes();
+    }
+  };
+
+  const pulseShape = (cycle) => {
+    const firstBeat = Math.max(0, 1 - Math.abs(cycle - .08) * 22);
+    const secondBeat = Math.max(0, 1 - Math.abs(cycle - .2) * 28) * .62;
+    return Math.max(firstBeat, secondBeat);
+  };
+
+  const render = (time = 0) => {
+    context.clearRect(0, 0, width, height);
+    const dark = document.documentElement.dataset.theme === "dark";
+    const connectionLimit = width < 700 ? 164 : 218;
+    const positions = nodes.map((node) => {
+      let x = node.x + Math.sin(time * node.speed + node.phase) * node.driftX;
+      let y = node.y + Math.cos(time * node.speed * .83 + node.phase) * node.driftY;
+      const dx = x - pointer.x;
+      const dy = y - pointer.y;
+      const distance = Math.hypot(dx, dy);
+      if (distance < 155 && distance > 0) {
+        const force = (1 - distance / 155) * 15;
+        x += dx / distance * force;
+        y += dy / distance * force;
+      }
+      return { ...node, x, y };
+    });
+
+    const edges = [];
+    for (let first = 0; first < positions.length; first += 1) {
+      for (let second = first + 1; second < positions.length; second += 1) {
+        const a = positions[first];
+        const b = positions[second];
+        const distance = Math.hypot(a.x - b.x, a.y - b.y);
+        if (distance > connectionLimit) continue;
+        const strength = 1 - distance / connectionLimit;
+        const gradient = context.createLinearGradient(a.x, a.y, b.x, b.y);
+        gradient.addColorStop(0, `rgba(${a.color.join(",")},${strength * (dark ? .48 : .31)})`);
+        gradient.addColorStop(1, `rgba(${b.color.join(",")},${strength * (dark ? .48 : .31)})`);
+        context.strokeStyle = gradient;
+        context.lineWidth = .8 + strength * .85;
+        context.beginPath();
+        context.moveTo(a.x, a.y);
+        context.lineTo(b.x, b.y);
+        context.stroke();
+        edges.push({ a, b, first, second, strength });
+      }
+    }
+
+    edges.forEach(({ a, b, first, second, strength }) => {
+      if ((first * 17 + second * 31) % 14 !== 0) return;
+      const phase = ((first + 1) * .071 + (second + 1) * .037) % 1;
+      const progress = (time * .00011 + phase) % 1;
+      for (let trail = 0; trail < 3; trail += 1) {
+        const trailProgress = (progress - trail * .025 + 1) % 1;
+        const x = a.x + (b.x - a.x) * trailProgress;
+        const y = a.y + (b.y - a.y) * trailProgress;
+        const alpha = (.74 - trail * .2) * Math.max(.35, strength);
+        context.save();
+        context.fillStyle = `rgba(255,204,0,${alpha})`;
+        context.shadowColor = "rgba(255,204,0,.72)";
+        context.shadowBlur = 8 - trail * 2;
+        context.beginPath();
+        context.arc(x, y, Math.max(1, 2.3 - trail * .55), 0, Math.PI * 2);
+        context.fill();
+        context.restore();
+      }
+    });
+
+    positions.forEach((node, index) => {
+      const [red, green, blue] = node.color;
+      if (node.vital) {
+        const cycle = (time / 1650 + index * .067) % 1;
+        const beat = pulseShape(cycle);
+        const ringRadius = 9 + beat * 12;
+        const glow = context.createRadialGradient(node.x, node.y, 0, node.x, node.y, 24 + beat * 8);
+        glow.addColorStop(0, `rgba(7,139,120,${.16 + beat * .2})`);
+        glow.addColorStop(1, "rgba(7,139,120,0)");
+        context.fillStyle = glow;
+        context.beginPath();
+        context.arc(node.x, node.y, 28 + beat * 8, 0, Math.PI * 2);
+        context.fill();
+        context.strokeStyle = `rgba(7,139,120,${.18 + beat * .42})`;
+        context.lineWidth = 1.2;
+        context.beginPath();
+        context.arc(node.x, node.y, ringRadius, 0, Math.PI * 2);
+        context.stroke();
+      }
+
+      context.save();
+      context.fillStyle = `rgba(${red},${green},${blue},${dark ? .82 : .68})`;
+      context.shadowColor = `rgba(${red},${green},${blue},.5)`;
+      context.shadowBlur = node.vital ? 12 : 7;
+      context.beginPath();
+      context.arc(node.x, node.y, node.radius + (node.vital ? .8 : 0), 0, Math.PI * 2);
+      context.fill();
+      context.restore();
+
+      if (node.vital) {
+        context.strokeStyle = dark ? "rgba(243,239,230,.78)" : "rgba(24,24,23,.6)";
+        context.lineWidth = 1;
+        context.beginPath();
+        context.moveTo(node.x - 3, node.y);
+        context.lineTo(node.x + 3, node.y);
+        context.moveTo(node.x, node.y - 3);
+        context.lineTo(node.x, node.y + 3);
+        context.stroke();
+      }
+    });
+  };
+
+  const animate = (time) => {
+    animationFrame = 0;
+    if (document.hidden || reducedMotion.matches) return;
+    render(time);
+    animationFrame = requestAnimationFrame(animate);
+  };
+
+  const start = () => {
+    if (!animationFrame && !document.hidden && !reducedMotion.matches) {
+      animationFrame = requestAnimationFrame(animate);
+    }
+  };
+
+  window.addEventListener("pointermove", (event) => {
+    pointer.x = event.clientX;
+    pointer.y = event.clientY;
+  }, { passive: true });
+  window.addEventListener("pointerleave", () => {
+    pointer.x = -1000;
+    pointer.y = -1000;
+  });
+  window.addEventListener("resize", resize);
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden && animationFrame) {
+      cancelAnimationFrame(animationFrame);
+      animationFrame = 0;
+    } else {
+      start();
+    }
+  });
+  reducedMotion.addEventListener("change", () => {
+    if (reducedMotion.matches) {
+      cancelAnimationFrame(animationFrame);
+      animationFrame = 0;
+      render(0);
+    } else {
+      start();
+    }
+  });
+
+  resize();
+  if (reducedMotion.matches) render(0);
+  else start();
+};
+
+initLivingMesh();
