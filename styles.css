@@ -279,6 +279,7 @@ h2 { font-size: clamp(43px, 5.2vw, 76px); line-height: 1.04; letter-spacing: -.0
 .project-grid { display: grid; grid-template-columns: 1.15fr .85fr; gap: 20px; }
 .project-card { min-height: 460px; padding: 32px; display: flex; flex-direction: column; justify-content: space-between; color: white; position: relative; overflow: hidden; border-radius: 4px; transition: transform .35s cubic-bezier(.2,.7,.2,1), box-shadow .35s ease; }
 .project-card:nth-child(3) { grid-column: 1 / -1; min-height: 350px; }
+.project-card:nth-child(4) { grid-column: 1 / -1; min-height: 520px; }
 .project-card.blue { background: linear-gradient(135deg, #172554 0%, #243b6b 52%, #31527f 100%); }
 .automation-visual { position: relative; z-index: 1; flex: 0 0 190px; width: 100%; margin: 6px 0 12px; transition: transform .45s cubic-bezier(.2,.7,.2,1); }
 .automation-visual svg { display: block; width: 100%; height: 164px; overflow: visible; }
@@ -306,6 +307,34 @@ h2 { font-size: clamp(43px, 5.2vw, 76px); line-height: 1.04; letter-spacing: -.0
 .project-card.orange { background: var(--orange); }
 .project-card.healthcare { min-height: 540px; background: linear-gradient(135deg, #075f58 0%, #078b78 48%, #0aa68d 100%); background-size: 160% 160%; }
 .project-card.violet { background: linear-gradient(135deg, #2b2445 0%, #46365f 52%, #685078 100%); background-size: 150% 150%; }
+.project-card.mri { background: linear-gradient(135deg, #101b25 0%, #18303a 52%, #1d4650 100%); background-size: 150% 150%; }
+.project-card.mri::before { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at 72% 45%, rgba(84,218,205,.13), transparent 26%), linear-gradient(rgba(179,236,230,.035) 1px, transparent 1px), linear-gradient(90deg, rgba(179,236,230,.035) 1px, transparent 1px); background-size: auto, 24px 24px, 24px 24px; pointer-events: none; }
+.project-card.mri::after { width: 420px; height: 420px; right: -160px; top: -170px; border: 44px solid rgba(157,236,228,.045); }
+.project-card.mri:hover { transform: translateY(-6px); background-position: 100% 100%; box-shadow: 0 24px 54px rgba(8,35,40,.25); }
+.project-card.mri .project-copy { max-width: 54%; }
+.project-card.mri .project-copy h3 { font-size: clamp(31px, 3.2vw, 48px); }
+.mri-visual { position: absolute; z-index: 1; top: 68px; right: 44px; width: min(43%, 540px); transition: transform .45s cubic-bezier(.2,.7,.2,1); }
+.mri-scan-shell { padding: 9px; border: 1px solid rgba(184,238,233,.25); border-radius: 18px; background: rgba(5,16,23,.38); box-shadow: 0 20px 50px rgba(2,12,17,.3); backdrop-filter: blur(8px); }
+.mri-scan-shell svg { display: block; width: 100%; height: auto; overflow: hidden; border-radius: 12px; }
+.mri-frame { fill: rgba(4,12,17,.86); stroke: rgba(184,238,233,.18); stroke-width: 1; }
+.mri-crosshair path { fill: none; stroke: rgba(174,232,225,.1); stroke-width: 1; stroke-dasharray: 3 6; }
+.mri-head { fill: #171b21; stroke: rgba(235,245,244,.28); stroke-width: 2; }
+.mri-brain { fill: url(#mri-tissue-gradient); opacity: .95; }
+.mri-folds path { fill: none; stroke: rgba(28,32,38,.58); stroke-width: 5; stroke-linecap: round; }
+.mri-ventricles { fill: rgba(15,19,25,.82); }
+.mri-mask { fill: rgba(71,221,204,.12); stroke: #69e0d2; stroke-width: 2; stroke-dasharray: 8 6; filter: drop-shadow(0 0 6px rgba(105,224,210,.38)); animation: mri-mask-breathe 3.6s ease-in-out infinite; }
+.mri-scan-line { animation: mri-scan-sweep 4.2s ease-in-out infinite; }
+.mri-scan-line rect:first-child { fill: #8ff4e8; filter: drop-shadow(0 0 7px rgba(143,244,232,.9)); }
+.mri-scan-glow { fill: rgba(105,224,210,.12); }
+.mri-corner-labels text { fill: rgba(205,241,237,.62); font: 700 8px/1 var(--display); letter-spacing: .12em; }
+.mri-results { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 10px; }
+.mri-results > span { display: grid; gap: 2px; padding: 8px 10px; border: 1px solid rgba(184,238,233,.18); border-radius: 8px; background: rgba(5,16,23,.38); color: rgba(222,243,240,.68); font-size: 8px; letter-spacing: .07em; text-transform: uppercase; }
+.mri-results strong { color: #fff; font-size: 14px; letter-spacing: -.02em; }
+.mri-results .mri-validation { grid-column: 1 / -1; display: flex; align-items: center; justify-content: center; gap: 7px; }
+.mri-validation i { width: 6px; height: 6px; border-radius: 50%; background: #69e0d2; box-shadow: 0 0 0 4px rgba(105,224,210,.12); }
+.project-card.mri:hover .mri-visual { transform: translateY(-5px) scale(1.012); }
+@keyframes mri-scan-sweep { 0%, 10% { transform: translateY(0); opacity: .2; } 50% { transform: translateY(184px); opacity: 1; } 90%, 100% { transform: translateY(0); opacity: .2; } }
+@keyframes mri-mask-breathe { 0%, 100% { stroke-opacity: .52; fill-opacity: .08; } 50% { stroke-opacity: 1; fill-opacity: .18; } }
 .project-card.violet::before { content: ""; position: absolute; inset: 0; z-index: 0; background: repeating-linear-gradient(0deg, transparent 0 17px, rgba(255,255,255,.035) 18px), radial-gradient(circle at 78% 42%, rgba(224,211,255,.17), transparent 20%); opacity: .82; pointer-events: none; }
 .project-card.violet::after { display: none; }
 .project-card.violet:hover { transform: translateY(-6px); background-position: 100% 100%; box-shadow: 0 22px 50px rgba(43,36,69,.24); }
@@ -613,6 +642,7 @@ html[data-theme="dark"] .social-links img[src*="github"] { filter: invert(1); }
   .timeline-detail { grid-column: auto; }
   .project-grid { grid-template-columns: 1fr; }
   .project-card:nth-child(3) { grid-column: auto; }
+  .project-card:nth-child(4) { grid-column: auto; }
   .achievement-grid, .certification-grid { grid-template-columns: 1fr; }
   .toolbox-landscape { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .toolbox-network { min-height: 780px; grid-template-columns: 1fr; }
@@ -653,6 +683,10 @@ html[data-theme="dark"] .social-links img[src*="github"] { filter: invert(1); }
   .project-card { min-height: 420px; padding: 25px; }
   .project-card.healthcare { min-height: 520px; }
   .project-card.violet .project-copy { max-width: 100%; }
+  .project-card.mri { min-height: 620px; }
+  .project-card.mri .project-copy { max-width: 100%; }
+  .mri-visual { position: relative; top: auto; right: auto; width: 100%; margin: 16px 0 18px; }
+  .mri-results { grid-template-columns: repeat(3, 1fr); }
   .pulse-monitor-visual { position: relative; top: auto; right: auto; width: 100%; margin: 16px 0 18px; }
   .healthcare-visual { flex-basis: 118px; height: 118px; margin-block: 8px 12px; }
   .healthcare-visual .healthcare-heart-icon { width: 68px; height: 57px; }
