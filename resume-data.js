@@ -86,6 +86,14 @@ window.RESUME_DATA = {
       category: "OpenCV / Signal Processing",
       color: "violet",
       link: "#"
+    },
+    {
+      number: "04",
+      title: "Brain MRI skull-stripping evaluator",
+      description: "Built a reproducible medical-imaging pipeline that compares classical skull-stripping methods across 558 held-out SynthStrip scans and 125 complete NFBS volumes. The best baseline reached 0.790 mean Dice, with boundary metrics, bootstrap confidence intervals, failure analysis, visual review tools, and 66 automated tests.",
+      category: "Medical Imaging / Research",
+      color: "mri",
+      link: "https://github.com/prasen2001/brain-mri-skull-stripping-evaluator"
     }
   ],
   skills: [

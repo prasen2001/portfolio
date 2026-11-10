@@ -342,6 +342,49 @@ document.querySelector("[data-projects]").innerHTML = data.projects
           <path class="pulse-laptop-detail" d="M174 200h72l-5 5h-62Z" />
         </svg>
         <div class="pulse-monitor-status"><span></span> Camera active <b>Forehead signal → BPM estimate</b></div>
+      </div>` : color === "mri" ? `
+      <div class="mri-visual" aria-hidden="true">
+        <div class="mri-scan-shell">
+          <svg viewBox="0 0 440 250" preserveAspectRatio="xMidYMid meet">
+            <defs>
+              <radialGradient id="mri-tissue-gradient" cx="49%" cy="44%" r="54%">
+                <stop offset="0" stop-color="#f4f0ec" />
+                <stop offset=".38" stop-color="#b8b7bd" />
+                <stop offset=".72" stop-color="#6f727a" />
+                <stop offset="1" stop-color="#292d34" />
+              </radialGradient>
+              <clipPath id="mri-brain-clip">
+                <path d="M217 27c-45-2-82 17-99 51-11 21-14 49-7 74 7 27 25 52 49 66 17 10 39 15 58 11 19 4 41-1 58-11 24-14 42-39 49-66 7-25 4-53-7-74-17-34-54-53-99-51Z" />
+              </clipPath>
+            </defs>
+            <rect class="mri-frame" x="7" y="7" width="426" height="236" rx="20" />
+            <g class="mri-crosshair">
+              <path d="M218 18v214M98 126h240" />
+            </g>
+            <path class="mri-head" d="M218 19c-51 0-94 21-113 61-12 24-15 55-7 83 8 30 28 57 55 73 19 11 43 16 65 12 22 4 46-1 65-12 27-16 47-43 55-73 8-28 5-59-7-83-19-40-62-61-113-61Z" />
+            <path class="mri-brain" d="M217 27c-45-2-82 17-99 51-11 21-14 49-7 74 7 27 25 52 49 66 17 10 39 15 58 11 19 4 41-1 58-11 24-14 42-39 49-66 7-25 4-53-7-74-17-34-54-53-99-51Z" />
+            <g class="mri-folds" clip-path="url(#mri-brain-clip)">
+              <path d="M123 73c31 11 49 4 62-19M111 102c30 12 55 4 78-17M109 134c25-7 48-3 65 12M119 170c28-14 53-10 72 11M151 207c7-25 22-38 43-44M313 73c-31 11-49 4-62-19M325 102c-30 12-55 4-78-17M327 134c-25-7-48-3-65 12M317 170c-28-14-53-10-72 11M285 207c-7-25-22-38-43-44M218 38v177" />
+            </g>
+            <path class="mri-ventricles" d="M183 111c10-12 23-12 35 1 12-13 25-13 35-1-4 12-13 20-23 23l-12 20-12-20c-10-3-19-11-23-23Z" />
+            <path class="mri-mask" d="M217 27c-45-2-82 17-99 51-11 21-14 49-7 74 7 27 25 52 49 66 17 10 39 15 58 11 19 4 41-1 58-11 24-14 42-39 49-66 7-25 4-53-7-74-17-34-54-53-99-51Z" />
+            <g class="mri-scan-line">
+              <rect x="104" y="30" width="228" height="3" rx="1.5" />
+              <rect class="mri-scan-glow" x="104" y="24" width="228" height="15" rx="7" />
+            </g>
+            <g class="mri-corner-labels">
+              <text x="25" y="31">CORONAL VIEW</text>
+              <text x="25" y="226">MASK OVERLAY</text>
+              <text x="352" y="31">R</text>
+            </g>
+          </svg>
+        </div>
+        <div class="mri-results">
+          <span><strong>0.790</strong> mean Dice</span>
+          <span><strong>558</strong> held-out scans</span>
+          <span><strong>125</strong> 3D volumes</span>
+          <span class="mri-validation"><i></i> Reproducible evaluation</span>
+        </div>
       </div>` : "";
     return `
     <${tag} class="project-card ${color} reveal" ${attributes}>
