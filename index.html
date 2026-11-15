@@ -3,7 +3,39 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Prasenjeet's professional portfolio." />
+    <meta name="description" content="Prasenjeet Tambe is a software engineer and USC MS Computer Science student building production full-stack applications, cloud infrastructure, distributed workflows, and AI-powered platforms." />
+    <meta name="author" content="Prasenjeet Tambe" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://prasen2001.github.io/portfolio/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://prasen2001.github.io/portfolio/" />
+    <meta property="og:title" content="Prasenjeet Tambe — Software Engineer" />
+    <meta property="og:description" content="Full-stack engineering, AI systems, and cloud infrastructure—backed by approximately three years of production software experience." />
+    <meta property="og:image" content="https://prasen2001.github.io/portfolio/assets/images/photographs/portfolio-profile.webp" />
+    <meta property="og:image:alt" content="Prasenjeet Tambe working at a laptop" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Prasenjeet Tambe — Software Engineer" />
+    <meta name="twitter:description" content="Full-stack engineering, AI systems, and cloud infrastructure." />
+    <meta name="twitter:image" content="https://prasen2001.github.io/portfolio/assets/images/photographs/portfolio-profile.webp" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Prasenjeet Tambe",
+        "url": "https://prasen2001.github.io/portfolio/",
+        "image": "https://prasen2001.github.io/portfolio/assets/images/photographs/portfolio-profile.webp",
+        "jobTitle": "Software Engineer",
+        "affiliation": {
+          "@type": "CollegeOrUniversity",
+          "name": "University of Southern California",
+          "url": "https://www.usc.edu/"
+        },
+        "sameAs": [
+          "https://github.com/prasen2001",
+          "https://linkedin.com/in/prasenjeet-tambe-478021193"
+        ]
+      }
+    </script>
     <meta name="theme-color" content="#990000" data-theme-color />
     <script>
       (() => {
@@ -16,7 +48,7 @@
         }
       })();
     </script>
-    <title>Prasenjeet — Portfolio</title>
+    <title>Prasenjeet Tambe — Software Engineer</title>
     <link rel="icon" href="assets/icons/favicon.svg?v=20261028-4" type="image/svg+xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -24,13 +56,15 @@
       href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles.css?v=20261109-55" />
+    <link rel="stylesheet" href="styles.css?v=20261114-60" />
   </head>
   <body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
     <div class="noise" aria-hidden="true"></div>
     <div class="site-grid-bg" aria-hidden="true"></div>
     <canvas class="site-living-mesh" data-living-mesh aria-hidden="true"></canvas>
     <header class="site-header">
+      <div class="site-scroll-progress" aria-hidden="true"><span data-scroll-progress></span></div>
       <a class="brand" href="#top" aria-label="Home">
         <img class="brand-mark" src="assets/icons/favicon.svg?v=20261028-4" alt="" aria-hidden="true" />
         <span data-person-name>Prasenjeet</span>
@@ -49,27 +83,26 @@
       </button>
       <nav class="site-nav" aria-label="Primary navigation">
         <div class="nav-section-links">
+          <a href="#about">About</a>
           <a href="#experience">Experience</a>
           <a href="#work">Work</a>
           <a href="#toolbox">Toolbox</a>
           <a href="#certifications">Certifications</a>
         </div>
         <div class="recruiter-actions" aria-label="Recruiter actions">
-          <!-- Resume download temporarily disabled.
-          <a class="recruiter-action" href="#" data-header-resume download hidden>
+          <a class="recruiter-action recruiter-action-primary" href="assets/documents/resumes/Prasenjeet_Tambe_Resume.pdf" data-header-resume target="_blank" rel="noreferrer">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m0 0 4-4m-4 4-4-4M5 20h14"/></svg>
-            <span>Download résumé</span>
+            <span>View résumé</span>
           </a>
-          -->
-          <a class="recruiter-action" href="mailto:hello@example.com" data-header-email>
+          <a class="recruiter-action" href="mailto:development.prasenjeet@gmail.com" data-header-email>
             <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 7 8 6 8-6"/></svg>
             <span>Email me</span>
           </a>
-          <a class="recruiter-action" href="#" data-header-github target="_blank" rel="noreferrer">
+          <a class="recruiter-action" href="https://github.com/prasen2001" data-header-github target="_blank" rel="noreferrer">
             <img class="social-brand-icon" src="assets/icons/social/github.svg" alt="" aria-hidden="true" />
             <span>View GitHub</span>
           </a>
-          <a class="recruiter-action recruiter-action-linkedin" href="#" data-header-linkedin target="_blank" rel="noreferrer">
+          <a class="recruiter-action recruiter-action-linkedin" href="https://linkedin.com/in/prasenjeet-tambe-478021193" data-header-linkedin target="_blank" rel="noreferrer">
             <img class="social-brand-icon" src="assets/icons/social/linkedin.svg" alt="" aria-hidden="true" />
             <span>Connect on LinkedIn</span>
           </a>
@@ -77,8 +110,8 @@
       </nav>
     </header>
 
-    <main id="top">
-      <section class="hero section-shell" aria-labelledby="hero-title">
+    <main id="main-content">
+      <section class="hero section-shell" id="top" aria-labelledby="hero-title">
         <div class="hero-copy hero-load-sequence">
           <div class="hero-status-block">
             <p class="usc-affiliation hero-load-item hero-load-affiliation">
@@ -86,22 +119,21 @@
               <span class="affiliation-at">at</span>
               <a class="usc-school-link" href="https://www.usc.edu/" target="_blank" rel="noreferrer" data-availability-school>University of Southern California</a>
             </p>
-            <p class="eyebrow availability-row hero-load-item hero-load-availability">
-              <span class="status-dot" aria-hidden="true"></span>
-              <span class="availability-status-group">
-                <span data-availability-status>Open to opportunities</span>
-                <a class="availability-cta" href="#contact">Let’s connect <span aria-hidden="true">↗</span></a>
-              </span>
-            </p>
           </div>
           <p class="hero-name hero-load-item hero-load-name" data-hero-name aria-label="Prasenjeet S. Tambe"></p>
-          <h1 class="hero-load-item hero-load-title" id="hero-title">I build AI systems that move from <em>idea to impact.</em></h1>
+          <h1 class="hero-load-item hero-load-title" id="hero-title">I build scalable software systems and <em>AI-powered products.</em></h1>
           <p class="hero-intro hero-load-item hero-load-intro" data-summary>
             A thoughtful professional focused on solving meaningful problems, building high-quality products, and creating measurable impact.
           </p>
           <div class="hero-actions hero-load-item hero-load-actions">
-            <a class="button button-primary" href="#work">Explore my work <span>↓</span></a>
-            <a class="text-link" href="#contact">Get in touch <span>↗</span></a>
+            <a class="button button-primary" href="assets/documents/resumes/Prasenjeet_Tambe_Resume.pdf" target="_blank" rel="noreferrer" data-hero-resume>View résumé <span>↗</span></a>
+            <a class="hero-social-link" href="https://github.com/prasen2001" target="_blank" rel="noreferrer" data-hero-github>
+              <img src="assets/icons/social/github.svg" alt="" aria-hidden="true" /> GitHub
+            </a>
+            <a class="hero-social-link" href="https://linkedin.com/in/prasenjeet-tambe-478021193" target="_blank" rel="noreferrer" data-hero-linkedin>
+              <img src="assets/icons/social/linkedin.svg" alt="" aria-hidden="true" /> LinkedIn
+            </a>
+            <a class="text-link" href="#contact">Contact <span>↗</span></a>
           </div>
         </div>
         <div class="hero-aside reveal delay-1" aria-label="Professional snapshot">
@@ -150,7 +182,7 @@
             <p data-about-body>
               My approach combines structured thinking with hands-on execution. I care about the details, communicate openly, and keep the larger goal in view from the first conversation through delivery.
             </p>
-            <a class="text-link resume-link" href="#" data-resume-link hidden>View résumé <span>↗</span></a>
+            <a class="text-link resume-link" href="assets/documents/resumes/Prasenjeet_Tambe_Resume.pdf" target="_blank" rel="noreferrer" data-resume-link>View résumé <span>↗</span></a>
           </div>
         </div>
         <div class="metrics" data-metrics></div>
@@ -229,7 +261,7 @@
           <p class="section-index">08 / Contact</p>
           <h2 id="contact-title">Have a problem worth solving?</h2>
           <p>I'm always happy to meet thoughtful people and hear about ambitious ideas.</p>
-          <a class="contact-email" data-email-link href="mailto:hello@example.com">hello@example.com <span>↗</span></a>
+          <a class="contact-email" data-email-link href="mailto:development.prasenjeet@gmail.com">development.prasenjeet@gmail.com <span>↗</span></a>
           <div class="contact-footer">
             <span>© <span data-year></span> <span data-person-name>Prasenjeet</span></span>
             <div class="social-links" data-socials></div>
@@ -238,7 +270,7 @@
       </section>
     </main>
 
-    <script src="resume-data.js?v=20261109-18"></script>
-    <script src="script.js?v=20261109-38"></script>
+    <script src="resume-data.js?v=20261114-20"></script>
+    <script src="script.js?v=20261114-40"></script>
   </body>
 </html>
