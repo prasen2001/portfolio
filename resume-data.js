@@ -1,46 +1,44 @@
-// Replace the placeholder values below with the details from your resume.
-// The website renders all resume-specific content from this one object.
+// Resume-specific content is rendered from this object.
 window.RESUME_DATA = {
   name: "Prasenjeet Tambe",
   heroName: "Prasenjeet S. Tambe",
   initials: "PT",
-  title: "Software Engineer · AI Systems & Full-Stack Products",
+  title: "Software Engineer | Full-Stack Engineering | AI Systems | Cloud Infrastructure",
   location: "Los Angeles, CA",
   availability: {
     degree: "Pursuing M.S. in Computer Science",
     school: "University of Southern California",
-    status: "Open to opportunities"
+    status: "Summer 2027 Software Engineering internships"
   },
   email: "development.prasenjeet@gmail.com",
   summary:
-    "Software engineer building production AI platforms, scalable automation systems, and cloud-native products—from frontend experiences to infrastructure.",
-  focus: "AI systems & full-stack",
+    "Software Engineer pursuing an MS in Computer Science at USC, with experience building production-grade full-stack applications, distributed workflows, cloud infrastructure, and AI-powered platforms.",
+  focus: "Full-stack, AI & cloud",
   about: {
-    lead: "I work across the stack to turn ambitious AI ideas into reliable products people can use every day.",
-    body: "As a founding engineer at Insaito, I built an end-to-end AI agent platform spanning multi-agent orchestration, RAG, document intelligence, React interfaces, Python services, and GCP infrastructure. Previously at Fold Health, I scaled healthcare workflow automation for 200+ providers and 1.7M+ active lives."
+    lead: "I build production software across interfaces, backend services, distributed workflows, and cloud infrastructure.",
+    body: "Across approximately three years of professional engineering experience, I have helped take an Agentic AI platform from zero to one and shipped healthcare workflow systems used in production. I enjoy owning the complete path from product requirements and frontend implementation to APIs, data, observability, and deployment."
   },
-  strengths: ["AI agents", "RAG", "React", "Python", "Cloud architecture", "Healthcare technology"],
+  strengths: ["Full-stack engineering", "Backend systems", "AI engineering", "Cloud infrastructure", "Workflow automation", "Healthcare technology"],
   metrics: [
-    { value: "1.7M+", label: "Lives supported" },
-    { value: "10×", label: "Workflow throughput" },
-    { value: "95%+", label: "Extraction accuracy" }
+    { value: "~3 years", label: "Professional engineering experience" },
+    { value: "2,000+", label: "Reusable AI workflows" },
+    { value: "1,000", label: "Concurrent PDF requests supported" }
   ],
   experience: [
     {
       period: "Sep 2025 — Aug 2026",
-      role: "Senior Software Engineer",
+      role: "Founding Software Engineer",
       company: "Insaito Inc. • Remote",
       companyUrl: "https://www.insaito.com/",
-      description: "Founding engineer for <a href=\"https://automatan.ai/\" target=\"_blank\" rel=\"noreferrer\">Automatan.ai</a>, owning the full product stack. Built multi-agent orchestration, RAG pipelines, and a Docling-based ingestion layer for PDFs, Word documents, text files, CSVs, and Excel workbooks. Used Docling VLM for visual document understanding and structured information extraction, processing 1,000+ documents daily at 95%+ accuracy. Used OpenAI API inference alongside model deployment on Nebius AI Cloud with NVIDIA H200 GPUs.",
+      description: "Played a key role in building <a href=\"https://automatan.ai/\" target=\"_blank\" rel=\"noreferrer\">Automatan.ai</a>, an Agentic AI platform, from zero to one—developing full-stack applications and backend services that power reusable AI workflows.",
       highlights: [
-        "Engineered an event-driven Google Sheets automation engine that processed 10,000+ updates through Pub/Sub, Firestore, and Cloud Storage with real-time status tracking.",
-        "Converted user-selected document insights into structured JSON and evaluated extraction against verified ground truth."
+        "Built Python and Flask services on Google Cloud using Firestore, Cloud Storage, Pub/Sub, and Secret Manager.",
+        "Developed document-intelligence pipelines with Docling, OCR, and vision-language models, including ingestion from Google Drive, OneDrive, Dropbox, PDFs, and spreadsheets.",
+        "Engineered event-driven Google Sheets automation with Pub/Sub, Firestore, and Cloud Storage, contributing to an ecosystem of 2,000+ reusable AI workflows."
       ],
       tags: [
-        "React", "Python", "Flask", "Jinja", "HTML", "CSS", "JavaScript", "GitHub Actions",
-        "AI agents", "RAG", "Docling", "Docling VLM", "OpenAI API", "Pinecone", "Secret Manager", "Cloud Run", "Compute Engine", "Pub/Sub",
-        "Firestore", "PostgreSQL", "App Engine", "Cloud Storage", "Cloud SQL", "Cloud Tasks", "Cloud Functions",
-        "Nebius AI Cloud", "NVIDIA H200"
+        "React", "Python", "Flask", "GCP", "Firestore", "Cloud Storage", "Pub/Sub", "Secret Manager",
+        "AI agents", "RAG", "Docling", "Docling VLM", "OCR", "OpenAI API", "GitHub Actions"
       ]
     },
     {
@@ -48,52 +46,72 @@ window.RESUME_DATA = {
       role: "Software Engineer",
       company: "Fold Health Inc. • Pune, India",
       companyUrl: "https://fold.health",
-      description: "Built healthcare workflow automation used by 200+ providers across 10+ organizations, supporting 1.7M+ active lives. Designed a provider-agnostic LLM inference layer that let users choose between OpenAI, Gemini, Claude, and other model APIs. Scaled concurrent workflow execution from 20 to 200 while reducing LLM inference costs by up to 80% and API calls by 3×.",
+      description: "Developed production full-stack healthcare applications and configurable workflow automation using React, React Flow, NestJS, and Python.",
       highlights: [
-        "Built an AWS Lambda PDF pipeline supporting 1,000+ concurrent requests, with database-backed caching to eliminate redundant processing.",
-        "Delivered an LLM-powered EHR synopsis with HIPAA-aware access controls, role-based authorization, and normalized structured output.",
-        "Shipped 50+ production features across healthcare products, from React performance and Redis caching to testing, releases, and production support."
+        "Built workflow systems supporting 40+ triggers and 100+ filters, and optimized interactions to reduce API calls by 3×.",
+        "Developed an AWS Lambda PDF-processing service supporting up to 1,000 concurrent requests.",
+        "Implemented event-driven workflows with AWS Step Functions, Lambda, PostgreSQL, Hasura, and Prisma, with frontend testing and production monitoring through CloudWatch and execution logs."
       ],
       tags: [
-        "Python", "TypeScript", "React", "React Flow", "NestJS", "GraphQL", "Hasura", "PostgreSQL",
-        "OpenAI / ChatGPT", "Google Gemini", "Anthropic Claude", "Prisma ORM", "SQLAlchemy ORM",
-        "AWS SAM", "Amazon SQS", "EC2", "ECS", "AWS Lambda", "Step Functions", "State Machines", "EventBridge",
-        "Parameter Store", "LLMs", "Microservices"
+        "React", "React Flow", "TypeScript", "NestJS", "Python", "PostgreSQL", "Hasura", "Prisma ORM",
+        "AWS Lambda", "Step Functions", "CloudWatch", "Amazon SQS", "EventBridge", "Microservices"
       ]
     }
   ],
   projects: [
     {
       number: "01",
-      title: "Automatan.ai at Insaito",
-      description: "At Insaito, I helped build an end-to-end AI agent platform with multi-agent execution, document-grounded RAG, configurable human-in-the-loop intelligence, and real-time workflow status.",
-      category: "AI Agent Platform",
+      title: "Agentic AI platform & orchestration",
+      description: "Helped take Automatan.ai from zero to one by building full-stack product surfaces, Python services, multi-agent execution, human-in-the-loop controls, and event-driven orchestration.",
+      category: "Production AI Platform",
       color: "blue",
-      link: "https://automatan.ai"
+      link: "https://automatan.ai",
+      technologies: ["React", "Python", "Flask", "GCP", "AI agents", "RAG"]
     },
     {
       number: "02",
-      title: "Healthcare workflow automation at Fold Health",
-      description: "At Fold Health, I helped build a scalable visual automation system with 40+ triggers and 100+ filters that saved providers 75% of their time while supporting 1.7M+ active lives.",
-      category: "Cloud / Healthcare",
+      title: "Healthcare workflow automation",
+      description: "Built configurable visual workflows with 40+ triggers and 100+ filters, event-driven AWS execution, and production observability for healthcare operations.",
+      category: "Full-Stack / Distributed Systems",
       color: "healthcare",
-      link: "https://fold.health"
+      link: "https://fold.health",
+      technologies: ["React Flow", "NestJS", "Python", "AWS Lambda", "Step Functions", "PostgreSQL"]
     },
     {
       number: "03",
-      title: "Contactless pulse monitoring",
-      description: "My B.E. final-year project: a computer-vision system that extracts a pulse signal from camera recordings, filters noise, and uses Fourier analysis to estimate BPM without physical contact.",
-      category: "OpenCV / Signal Processing",
-      color: "violet",
-      link: "#"
+      title: "DocuMind document intelligence workspace",
+      description: "Built a local-first PDF intelligence platform that extracts text, tables, images, charts, layout, and source coordinates. It supports evidence-grounded RAG with highlighted page regions, multi-document comparison, asynchronous ingestion, and persistent human review.",
+      category: "Document AI / Grounded RAG",
+      color: "documind",
+      link: "https://github.com/prasen2001/DocuMind",
+      technologies: ["Python", "OpenCV", "Tesseract", "RAG", "PyTorch", "Docker"]
     },
     {
       number: "04",
+      title: "JobCover application intelligence",
+      description: "Built a full-stack workspace for versioned résumés, explainable job-fit scoring, grounded cover-letter generation, and guarded LaTeX résumé tailoring. The system includes authentication, selectable model providers, document parsing, and security controls for uploads and job-link fetching.",
+      category: "Full-Stack AI Product",
+      color: "jobcover",
+      link: "https://github.com/prasen2001/jobcover",
+      technologies: ["React", "TypeScript", "Flask", "Docling", "Google Gemini", "LangChain"]
+    },
+    {
+      number: "05",
       title: "Brain MRI skull-stripping evaluator",
       description: "Built a reproducible medical-imaging pipeline that compares classical skull-stripping methods across 558 held-out SynthStrip scans and 125 complete NFBS volumes. The best baseline reached 0.790 mean Dice, with boundary metrics, bootstrap confidence intervals, failure analysis, visual review tools, and 66 automated tests.",
       category: "Medical Imaging / Research",
       color: "mri",
-      link: "https://github.com/prasen2001/brain-mri-skull-stripping-evaluator"
+      link: "https://github.com/prasen2001/brain-mri-skull-stripping-evaluator",
+      technologies: ["Python", "NumPy", "Scikit-learn", "Medical imaging", "Pytest"]
+    },
+    {
+      number: "06",
+      title: "Hospital management system",
+      description: "Created a Java and MySQL desktop application for recording patient information, diagnoses, medicines, ward requirements, search history, updates, and PDF report generation.",
+      category: "Java / Database Application",
+      color: "amber",
+      link: "https://github.com/prasen2001/Hospital_Management_System",
+      technologies: ["Java", "MySQL", "SQL", "Java Swing"]
     }
   ],
   skills: [
@@ -105,7 +123,7 @@ window.RESUME_DATA = {
     {
       name: "Scale workflow automation",
       detail: "Engineer event-driven systems that handle real production load while improving throughput, reliability, and operating cost.",
-      outcomes: ["10× throughput", "Cost-efficient inference", "Reliable orchestration"]
+      outcomes: ["Scalable execution", "Cost-efficient systems", "Reliable orchestration"]
     },
     {
       name: "Ship complete products",
@@ -121,48 +139,38 @@ window.RESUME_DATA = {
   toolbox: [
     {
       category: "Languages",
-      description: "Core tools for application, systems, and data work.",
-      technologies: ["Python", "TypeScript", "JavaScript", "Java", "C", "C++", "SQL"]
+      description: "Primary languages used across product, backend, systems, and data work.",
+      technologies: ["Java", "Python", "C++", "JavaScript", "TypeScript", "SQL"]
     },
     {
-      category: "Frontend & APIs",
-      description: "Interfaces and services designed as one product system.",
-      technologies: ["React", "React Flow", "Node.js", "NestJS", "Flask", "GraphQL"]
+      category: "Frontend",
+      description: "Accessible interfaces and visual workflow experiences.",
+      technologies: ["React", "React Flow", "HTML", "CSS"]
     },
     {
-      category: "AI & document intelligence",
-      description: "Grounded AI pipelines from ingestion through evaluation.",
-      technologies: ["AI agents", "RAG", "Docling", "Docling VLM", "OpenAI API", "Google Gemini", "Anthropic Claude", "LangChain", "PyTorch", "TensorFlow", "OpenCV"]
+      category: "Backend",
+      description: "APIs and services for production application workloads.",
+      technologies: ["Node.js", "NestJS", "Flask", "REST APIs"]
     },
     {
-      category: "Cloud, data & persistence",
-      description: "Cloud platforms, containers, databases, vector search, and ORM-backed persistence.",
-      technologies: ["GCP", "AWS", "Docker", "PostgreSQL", "MySQL", "MongoDB", "Redis", "Pinecone", "Prisma ORM", "SQLAlchemy ORM"]
+      category: "Databases",
+      description: "Relational, in-memory, document, and application data layers.",
+      technologies: ["PostgreSQL", "MySQL", "Redis", "Firestore", "Prisma ORM", "Hasura"]
     },
     {
-      category: "Google Cloud platform",
-      description: "The managed services behind Automatan.ai's secure, event-driven platform.",
-      technologies: ["Secret Manager", "Cloud Run", "Compute Engine", "Pub/Sub", "Firestore", "App Engine", "Cloud Storage", "Cloud SQL", "Cloud Tasks", "Cloud Functions"]
+      category: "Cloud & infrastructure",
+      description: "Cloud-native compute, orchestration, messaging, storage, and observability.",
+      technologies: ["AWS", "GCP", "AWS Lambda", "Step Functions", "CloudWatch", "Cloud Storage", "Pub/Sub", "Docker"]
     },
     {
-      category: "Web delivery & automation",
-      description: "Design implementation, product delivery, server-rendered surfaces, and continuous integration.",
-      technologies: ["Figma", "Jira", "HTML", "CSS", "JavaScript", "Jinja", "Git", "GitHub", "GitLab", "GitHub Actions", "CI/CD", "Flask"]
+      category: "Developer tools",
+      description: "Source control, delivery automation, and Linux-based development.",
+      technologies: ["Git", "GitHub Actions", "GitLab", "CI/CD", "Linux"]
     },
     {
-      category: "AI infrastructure & inference",
-      description: "Production model serving on accelerated cloud infrastructure.",
-      technologies: ["OpenAI API", "Google Gemini", "Anthropic Claude", "Nebius AI Cloud", "NVIDIA H200", "Pinecone", "Cloud Run", "Docker", "LLMs"]
-    },
-    {
-      category: "AWS compute & orchestration",
-      description: "Compute, eventing, serverless, configuration, and workflow services behind Fold Health.",
-      technologies: ["AWS SAM", "Amazon SQS", "EC2", "ECS", "Amazon RDS", "Amazon S3", "API Gateway", "AWS Lambda", "Step Functions", "State Machines", "EventBridge", "Parameter Store"]
-    },
-    {
-      category: "Data science & computer vision",
-      description: "Scientific computing, classical machine learning, OCR, and image-based signal extraction.",
-      technologies: ["Scikit-learn", "NumPy", "Pandas", "OpenCV", "Tesseract", "EasyOCR"]
+      category: "AI engineering",
+      description: "Agentic systems, grounded generation, document intelligence, and automation.",
+      technologies: ["AI agents", "LLMs", "RAG", "VLMs", "OCR", "Docling", "Workflow automation"]
     }
   ],
   education: [
@@ -172,7 +180,7 @@ window.RESUME_DATA = {
         { name: "University of Southern California", url: "https://usc.edu/" },
         { name: "Viterbi School of Engineering", url: "https://viterbischool.usc.edu/" }
       ],
-      period: "Aug 2026 — Dec 2028",
+      period: "Expected December 2028",
       location: "Los Angeles, CA",
       coursework: ["Database Systems", "Fundamentals of Programming Systems"]
     },
@@ -182,7 +190,7 @@ window.RESUME_DATA = {
         { name: "Pune Institute of Computer Technology", url: "https://pict.edu/" }
       ],
       detail: "CGPA 8.76/10",
-      period: "Aug 2019 — Jun 2023",
+      period: "2019 — 2023",
       location: "Pune, India",
       coursework: [
         "Programming & Problem Solving",
@@ -274,5 +282,5 @@ window.RESUME_DATA = {
     { label: "LinkedIn", url: "https://linkedin.com/in/prasenjeet-tambe-478021193" },
     { label: "GitHub", url: "https://github.com/prasen2001" }
   ],
-  resumeUrl: null
+  resumeUrl: "assets/documents/resumes/Prasenjeet_Tambe_Resume.pdf"
 };

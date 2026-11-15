@@ -100,7 +100,12 @@ const techAliases = {
   "pinecone vector db": "pinecone",
   "jinja templates": "jinja",
   "openai / chatgpt": "openai api",
-  "docling vlm": "docling"
+  "docling vlm": "docling",
+  "cloudwatch": "aws",
+  "medical imaging": "opencv",
+  "pytest": "python",
+  "java swing": "java",
+  "signal processing": "opencv"
 };
 
 const techIcons = {
@@ -132,7 +137,12 @@ const techIcons = {
   "opencv": `<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="6.5" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="7" cy="15.5" r="4" fill="none" stroke="currentColor" stroke-width="2" opacity=".7"/><circle cx="17" cy="15.5" r="4" fill="none" stroke="currentColor" stroke-width="2" opacity=".4"/></svg>`,
   "c": `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 2.5 8.2 4.7v9.6L12 21.5l-8.2-4.7V7.2Z" fill="currentColor"/><path d="M15.8 9.2A4.2 4.2 0 1 0 15.8 15" fill="none" stroke="var(--icon-cut, white)" stroke-width="2" stroke-linecap="round"/></svg>`,
   "tesseract": `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3H3v5M19 3h2v5M5 21H3v-5M19 21h2v-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M7 7h10M12 7v10M9 17h6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>`,
-  "easyocr": `<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="3" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M8 8h8M8 12h5M8 16h7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="m15.5 12.5 1.3 1.3 2.2-2.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>`
+  "easyocr": `<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="3" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M8 8h8M8 12h5M8 16h7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="m15.5 12.5 1.3 1.3 2.2-2.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+  "rest apis": `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 7H5a3 3 0 0 0-3 3v4a3 3 0 0 0 3 3h3M16 7h3a3 3 0 0 1 3 3v4a3 3 0 0 1-3 3h-3M7 12h10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="m14 9 3 3-3 3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+  "linux": `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 9c0-4 1.4-6 4-6s4 2 4 6c2.3 2.4 3 5.3 2.2 8.7-1.4 2.1-3.5 3.3-6.2 3.3s-4.8-1.2-6.2-3.3C5 14.3 5.7 11.4 8 9Z" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="10" cy="8" r="1" fill="currentColor"/><circle cx="14" cy="8" r="1" fill="currentColor"/><path d="m10 11 2 1.2 2-1.2M7 17l-3 2M17 17l3 2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>`,
+  "vlms": `<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="14" rx="3" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="m6 15 4-4 3 3 2-2 3 3M8 8.5h.01M9 21h6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+  "ocr": `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3H3v5M19 3h2v5M5 21H3v-5M19 21h2v-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M7 8h10M7 12h7M7 16h9" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>`,
+  "workflow automation": `<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="4" width="6" height="5" rx="1.2" fill="none" stroke="currentColor" stroke-width="1.6"/><rect x="15.5" y="15" width="6" height="5" rx="1.2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M8.5 6.5H14a3 3 0 0 1 3 3V15M14.5 12.5 17 15l2.5-2.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>`
 };
 
 const techIcon = (name) => {
@@ -166,23 +176,7 @@ if (heroName) {
     }).join("");
     return `<span class="hero-name-word${wordIndex === 0 ? " hero-name-first" : ""}" aria-hidden="true">${letters}</span>`;
   }).join("");
-  heroName.innerHTML = `
-    <span class="hero-name-final">${fullName}</span>
-    <span class="name-push-scene" aria-hidden="true">
-      <span class="name-push-rig">
-        <svg class="name-push-character" viewBox="0 0 54 72">
-          <circle class="push-head" cx="22" cy="13" r="9" />
-          <path class="push-body" d="M22 22 28 43" />
-          <path class="push-arm-a" d="M25 28 43 24" />
-          <path class="push-arm-b" d="M27 33 44 31" />
-          <path class="push-leg-a" d="M28 43 15 63" />
-          <path class="push-leg-b" d="M28 43 41 62" />
-          <path class="push-cap" d="M13 11q9-11 18 0M13 11h21" />
-        </svg>
-        <span class="name-push-block"><span>${data.heroName}</span></span>
-      </span>
-      <span class="name-push-ground"></span>
-    </span>`;
+  heroName.innerHTML = `<span class="hero-name-final">${fullName}</span>`;
 }
 setText("[data-availability-degree]", data.availability.degree);
 setText("[data-availability-school]", data.availability.school);
@@ -194,7 +188,7 @@ setText("[data-about-lead]", data.about.lead);
 setText("[data-about-body]", data.about.body);
 setText("[data-year]", new Date().getFullYear());
 
-document.title = `${data.name} — ${data.title}`;
+document.title = `${data.name} — Software Engineer`;
 document.querySelector('meta[name="description"]').content = data.summary;
 
 const tickerItems = [...data.strengths, ...data.strengths]
@@ -205,7 +199,7 @@ document.querySelector("[data-ticker]").innerHTML = tickerItems;
 document.querySelector("[data-metrics]").innerHTML = data.metrics
   .map(({ value, label }) => `
     <div class="metric reveal">
-      <span class="metric-value">${value}</span>
+      <span class="metric-value" data-count-value="${value}">${value}</span>
       <span class="metric-label">${label}</span>
     </div>`)
   .join("");
@@ -229,7 +223,7 @@ document.querySelector("[data-experience]").innerHTML = data.experience
   .join("");
 
 document.querySelector("[data-projects]").innerHTML = data.projects
-  .map(({ number, title, description, category, color, link }) => {
+  .map(({ number, title, description, category, color, link, technologies = [] }) => {
     const tag = link !== "#" ? "a" : "article";
     const attributes = link !== "#" ? `href="${link}" target="_blank" rel="noreferrer"` : "";
     const visual = color === "blue" ? `
@@ -388,9 +382,14 @@ document.querySelector("[data-projects]").innerHTML = data.projects
       </div>` : "";
     return `
     <${tag} class="project-card ${color} reveal" ${attributes}>
+      <span class="project-spotlight" aria-hidden="true"></span>
       <div class="project-top"><span>${number}</span><span>${category}</span></div>
       ${visual}
-      <div class="project-copy"><h3>${title}</h3><p>${description}</p></div>
+      <div class="project-copy">
+        <h3>${title}</h3>
+        <p>${description}</p>
+        ${technologies.length ? `<div class="project-tech-list" aria-label="Technology stack">${technologies.map((technology) => techBadge(technology, "project-tech")).join("")}</div>` : ""}
+      </div>
       <span class="project-arrow" aria-hidden="true">↗</span>
     </${tag}>`;
   })
@@ -702,12 +701,16 @@ if (data.resumeUrl) {
   const headerResumeLink = document.querySelector("[data-header-resume]");
   headerResumeLink.hidden = false;
   headerResumeLink.href = data.resumeUrl;
+  const heroResumeLink = document.querySelector("[data-hero-resume]");
+  if (heroResumeLink) heroResumeLink.href = data.resumeUrl;
 }
 
 document.querySelector("[data-header-email]").href = `mailto:${data.email}`;
 const socialByLabel = Object.fromEntries(data.socials.map((social) => [social.label.toLowerCase(), social.url]));
 document.querySelector("[data-header-github]").href = socialByLabel.github;
 document.querySelector("[data-header-linkedin]").href = socialByLabel.linkedin;
+document.querySelector("[data-hero-github]").href = socialByLabel.github;
+document.querySelector("[data-hero-linkedin]").href = socialByLabel.linkedin;
 
 const menuButton = document.querySelector(".menu-button");
 const nav = document.querySelector(".site-nav");
@@ -730,6 +733,85 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.12 });
 
 document.querySelectorAll(".reveal").forEach((element) => observer.observe(element));
+
+const initPageFeedback = () => {
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const progressBar = document.querySelector("[data-scroll-progress]");
+  const navLinks = [...document.querySelectorAll(".nav-section-links a[href^='#']")];
+  const trackedSections = navLinks
+    .map((link) => ({ link, section: document.querySelector(link.getAttribute("href")) }))
+    .filter(({ section }) => section);
+  let scrollFrame = 0;
+
+  const updatePageState = () => {
+    scrollFrame = 0;
+    const scrollable = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+    const progress = Math.min(1, Math.max(0, window.scrollY / scrollable));
+    progressBar?.style.setProperty("--page-progress", progress.toFixed(4));
+
+    const marker = window.scrollY + Math.min(window.innerHeight * .34, 260);
+    let active;
+    trackedSections.forEach((item) => {
+      if (item.section.offsetTop <= marker) active = item;
+    });
+    trackedSections.forEach(({ link }) => {
+      const isActive = link === active?.link;
+      link.classList.toggle("is-active", isActive);
+      if (isActive) link.setAttribute("aria-current", "location");
+      else link.removeAttribute("aria-current");
+    });
+  };
+
+  window.addEventListener("scroll", () => {
+    if (!scrollFrame) scrollFrame = requestAnimationFrame(updatePageState);
+  }, { passive: true });
+  window.addEventListener("resize", updatePageState);
+  updatePageState();
+
+  const counterObserver = new IntersectionObserver((entries, currentObserver) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      const element = entry.target;
+      const original = element.dataset.countValue || element.textContent.trim();
+      const match = original.match(/^(.*?)([\d,]+)(.*)$/);
+      if (!match || reducedMotion.matches) {
+        element.textContent = original;
+        currentObserver.unobserve(element);
+        return;
+      }
+      const [, prefix, numberText, suffix] = match;
+      const target = Number(numberText.replaceAll(",", ""));
+      const startedAt = performance.now();
+      const duration = 1100;
+      const renderCount = (time) => {
+        const elapsed = Math.min(1, (time - startedAt) / duration);
+        const eased = 1 - Math.pow(1 - elapsed, 3);
+        element.textContent = `${prefix}${Math.round(target * eased).toLocaleString("en-US")}${suffix}`;
+        if (elapsed < 1) requestAnimationFrame(renderCount);
+        else element.textContent = original;
+      };
+      requestAnimationFrame(renderCount);
+      currentObserver.unobserve(element);
+    });
+  }, { threshold: .65 });
+  document.querySelectorAll("[data-count-value]").forEach((element) => counterObserver.observe(element));
+
+  if (matchMedia("(hover: hover) and (pointer: fine)").matches && !reducedMotion.matches) {
+    document.querySelectorAll(".project-card").forEach((card) => {
+      card.addEventListener("pointermove", (event) => {
+        const bounds = card.getBoundingClientRect();
+        card.style.setProperty("--spotlight-x", `${event.clientX - bounds.left}px`);
+        card.style.setProperty("--spotlight-y", `${event.clientY - bounds.top}px`);
+        card.style.setProperty("--spotlight-opacity", "1");
+      });
+      card.addEventListener("pointerleave", () => {
+        card.style.setProperty("--spotlight-opacity", "0");
+      });
+    });
+  }
+};
+
+initPageFeedback();
 
 const initHeroSpatialBackground = () => {
   const canvas = document.querySelector("[data-hero-spatial]");
@@ -943,7 +1025,7 @@ const initLivingMesh = () => {
   const createNodes = () => {
     const compact = width < 700;
     const random = seededRandom(compact ? 4301 : 9107);
-    const count = compact ? 31 : 54;
+    const count = compact ? 22 : 36;
     nodes = Array.from({ length: count }, (_, index) => ({
       x: random() * width,
       y: random() * height,
